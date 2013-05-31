@@ -13,13 +13,13 @@
  * obtain it through the world-wide-web, please send an email
  * to license@magentocommerce.com so we can send you a copy immediately.
  *
- * package    Magento_Customization
+ * package    Listrak_SetContact
  * copyright  Copyright (c) 2013 Zaria Ruiz
  * license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
  
  require_once 'Mage/Customer/controllers/AccountController.php';
- class Magento_Customization_Customer_AccountController extends Mage_Core_Controller_Front_Action
+ class Listrak_SetContact_Customer_AccountController extends Mage_Core_Controller_Front_Action
  {
     
     public function createPostAction() {
