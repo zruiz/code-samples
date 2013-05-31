@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Magento
+ * Magento Enterprise
  *
  * NOTICE OF LICENSE
  *
@@ -18,6 +18,13 @@
  * license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
  
+/**
+     * Fired on controller_action_predispatch event
+     * Redirects every request but create account, forgot pass and reset pass to login page if customer session is not actived
+     *
+     * @param Varien_Event_Observer $observer
+     */
+	 
 class NGG_CheckLogin_Model_Observer extends Varien_Object
 {
     public function checkForLogin(Varien_Event_Observer $observer){
