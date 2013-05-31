@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <NGG_CheckLogin>
+            <version>0.0.1</version>
+        </NGG_CheckLogin>
+    </modules>
+    <global>
+        <models>
+            <checklogin>
+                <class>NGG_CheckLogin_Model</class>
+            </checklogin>
+        </models>
+	</global>	
+    <frontend>	
+        <events>
+        <controller_action_predispatch>
+            <observers>
+                <checklogin_controller_action_predispatch>
+                    <class>checklogin/observer</class>
+                    <method>checkForLogin</method>
+                </checklogin_controller_action_predispatch>
+            </observers>
+        </controller_action_predispatch>
+    </events>
+    </frontend>	
+   
+</config>
