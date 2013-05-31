@@ -1,0 +1,10 @@
+SELECT *
+FROM `salesrule_coupon`
+WHERE `rule_id` =184
+AND `code` LIKE '%SAMP%'
+
+
+UPDATE `salesrule_coupon` SET `usage_limit` = '1',
+`usage_per_customer` = '1'
+WHERE `salesrule_coupon`.`rule_id` =184
+AND `code` LIKE '%SAMP%'
