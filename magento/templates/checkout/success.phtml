@@ -1,0 +1,583 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2011 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+?>
+<div class="page-title">
+    <h1><?php echo $this->__('Your order has been received') ?></h1>
+</div>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<h2 class="sub-title"><?php echo $this->__('Thank you for your purchase!') ?></h2>
+<h1 class="sub-title"><?php echo $this->__('Please wait until the order information is populated.') ?></h1>
+
+<?php
+try {
+	$order = Mage::getModel('sales/order')->loadByIncrementId(Mage::getSingleton('checkout/session')->getLastRealOrderId());
+	
+	$_totalData = $order->getData();
+	$_id = $_totalData['entity_id'];
+	$_grand = number_format($_totalData['grand_total'],2);
+	$_sub = number_format($_totalData['subtotal'],2);
+	$_qty = $_totalData['weight'];
+	$_tax = number_format($_totalData['tax_amount'],2);
+	$_shipping = number_format($_totalData['shipping_amount'],2);
+	$_discount = number_format($_totalData['discount_amount'],2);
+	$_date = $_totalData['created_at'];
+	$format_date = date('m-d-Y', strtotime($_date));
+	
+	$_amount = $_sub + $_discount;
+	
+	$amount = number_format($_amount,2);
+	
+	$email = $order->getCustomerEmail();
+	$shipping_address_data = $order->getShippingAddress();
+    $billing_address_data = $order->getBillingAddress();
+	
+	$customerid = $shipping_address_data['customer_id'];
+	$firstname = $shipping_address_data['firstname'];
+	$lastname = $shipping_address_data['lastname'];
+	$address = $shipping_address_data['street'];
+	$city = $shipping_address_data['city'];
+	$state = $shipping_address_data['region'];
+	$country = "United States";
+	$store_url = "http://www.gothamcigars.com";            
+    
+	if($order->getCustomerId() === NULL){	
+	    $cust_order = Mage::getModel('enterprise_customer/sales_order')->load($_id);
+				
+		$_cust_orderData = $cust_order->getData();
+		$premium = $_cust_orderData['customer_premium_cigars'];
+		$machine = $_cust_orderData['customer_machine_made'];
+		$little = $_cust_orderData['customer_little_cigars'];
+		$fname = $billing_address_data['firstname'];
+	    $lname = $billing_address_data['lastname'];
+    } else {
+	$customer = Mage::getModel('customer/customer')->load($order->getCustomerId());
+    	
+	if ($customer):
+		$premium = $customer->getData('premium_cigars');
+		$machine = $customer->getData('machine_made');
+		$little = $customer->getData('little_cigars');
+		$fname = $customer->getData('firstname');
+		$lname = $customer->getData('lastname');
+		$dob = $customer->getData('dob');
+		$gender = $customer->getData('gender');
+	endif;
+	}		
+}
+catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+}
+?> 
+
+                 <!--/////////////////////////////////////////////////////////////////////////////////////////////////
+                  ////////////////////////////////////        Tracking Pixels         /////////////////////////////////
+                 //////////////////////////////////////////////////////////////////////////////////////////////////-->
+
+				 <!-- START Trusted Stores Order -->
+              <div id="gts-order" style="display:none;">
+
+                <!-- start order and merchant information -->
+                <span id="gts-o-id">
+                  <?php echo $this->getOrderId(); ?>
+                </span>
+                <span id="gts-o-domain">www.gothamcigars.com</span>
+                <span id="gts-o-email">
+                  <?php echo $email; ?>
+                </span>
+                <span id="gts-o-country">
+                  US
+                </span>
+                <span id="gts-o-currency">USD</span>
+                <span id="gts-o-total">
+                  <?php echo $amount ?>
+                </span>
+                <span id="gts-o-discounts">
+                  <?php echo $_discount ?>
+                </span>
+                <span id="gts-o-shipping-total">
+                  <?php echo $_shipping ?>
+                </span>
+                <span id="gts-o-tax-total">
+                  <?php echo $_tax ?>
+                </span>
+                <span id="gts-o-est-ship-date"><?php echo Date('Y-m-d', strtotime('+7 days')); ?></span>
+                
+                <!-- end order and merchant information -->
+
+                <!-- start repeated item specific information -->
+                <!-- item example: this area repeated for each item in the order -->
+                <?php foreach ($order->getAllItems() as $item){ ?>
+                  <span class="gts-item">
+                  <span class="gts-i-name">
+                    <?php echo $item->getName(); ?>
+                  </span>
+                  <span class="gts-i-price">
+                    <?php echo number_format($item->getPrice(),2); ?>
+                  </span>
+                  <span class="gts-i-quantity">
+                    <?php echo number_format($item->getQtyOrdered(),0); ?>
+                  </span>
+                  
+                </span>
+                 <?php  } ?>
+                <!-- end item 1 example -->
+                <!-- end repeated item specific information -->
+
+              </div>
+              <!-- END Trusted Stores -->
+			  
+              <!-- Google Analytics Start-->
+              
+            
+              <script type="text/javascript">
+                function getCookie(c_name)
+                {
+                if (document.cookie.length>0)
+                {
+                c_start=document.cookie.indexOf(c_name + "=");
+                if (c_start!=-1)
+                {
+                c_start=c_start + c_name.length+1;
+                c_end=document.cookie.indexOf(";",c_start);
+                if (c_end==-1) c_end=document.cookie.length;
+                return unescape(document.cookie.substring(c_start,c_end));
+                }
+                }
+                return "";
+                }
+              </script>
+
+              <script type="text/javascript">
+
+                var _gaq = _gaq || [];
+                _gaq.push(['_setAccount', 'UA-4957880-1']);
+                _gaq.push(['_setCampNameKey', 'utm_campaign']);
+                _gaq.push(['_setCampMediumKey', 'utm_medium']);
+                _gaq.push(['_setCampSourceKey', 'utm_source']);
+                _gaq.push(['_setCustomVar', 1, 'Post Conversions - Source', getCookie("_utmz").split('|')[0].split('utmcsr=')[1], 1]);
+                _gaq.push(['_setCustomVar', 2, 'Post Conversions - Campaign', getCookie("_utmz").split('|')[1].split('utmccn=')[1], 1]);
+                _gaq.push(['_setCustomVar', 3, 'Post Conversions - Amount', '<?php echo $amount; ?>', 1]);
+                _gaq.push(['_trackPageview']);
+                _gaq.push(['_addTrans',
+                '<?php echo $this->getOrderId(); ?>',
+                '<?php echo $store_url; ?>',
+                '<?php echo $amount; ?>',
+                '<?php echo $_tax; ?>',
+                '<?php echo $_shipping; ?>',
+                '<?php echo $city; ?>',
+                '<?php echo $state; ?>',
+                '<?php echo $country; ?>'
+                ]);
+
+          <?php foreach ($order->getAllItems() as $item){ ?>
+		  
+                _gaq.push(['_addItem',
+                            '<?php echo $this->getOrderId(); ?>',
+                            '<?php echo $item->getSku(); ?>',
+                            '<?php echo $item->getName(); ?>',
+                            '<?php echo $item->getName(); ?>',
+                            '<?php echo $item->getPrice(); ?>',
+                            '<?php echo $item->getQtyOrdered(); ?>'
+                            ]);
+
+            <?php  } ?>
+                         
+                         _gaq.push(['_trackTrans']);
+
+                          (function() {
+                          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+                          })();
+
+              </script>
+              
+              <!--START Become.com ROI tracker -->
+     
+              <script type="text/javascript">
+                var become_merchant_id = 'F3E1D2D8998A9A2F';
+                var become_order_num = '<?php echo $this->getOrderId(); ?>';
+                var become_purchased_items = new Array();
+
+                <?php foreach ($order->getAllItems() as $item){ ?>
+                          
+                    var become_item = new Object();
+                    become_item.productid = '<?php echo $item->getSku(); ?>';
+                    become_item.category = '<?php echo $item->getName(); ?>';
+                    become_item.price = '<?php echo $item->getPrice(); ?>';
+                    become_item.quantity = '<?php echo $item->getQtyOrdered(); ?>';
+                    become_item.image = '';
+                    become_purchased_items.push(become_item);
+
+               <?php  } ?>
+
+              </script>
+
+              <script type="text/javascript" language="javascript" src="https://partner.become.com/roi-tracker2/conversion.js"></script>
+
+              <noscript>
+                <img src="https://partner.become.com/roi-tracker2/t.gif?merchantid=F3E1D2D8998A9A2F&order_id=<?php echo $this->getOrderId(); ?>&order_value=<?php echo $amount ?>" style="display:none;border:0;"/>
+              </noscript>
+              <!--END Become.com ROI tracker -->
+           
+		     <!--Affiliate Programs Gateway -->
+			<?php if ($_COOKIE['gateway'] == 'pjn') {?>  
+			
+			<?php
+				$pqtys = array();
+				$pprices = array();
+				$pnames = array();
+				$pqskus = array();
+				$i = 0;
+				
+				foreach ($order->getAllItems() as $item){ 
+				    $i += 1;
+					$total = number_format($item->getPrice()*$item->getQtyOrdered(),2);
+					$total_d = number_format($item->getRowTotal()-$item->getDiscountAmount(),2);
+					$pskus[$item->getProductId()] = 'ITEM'.$i.'='.$item->getSku();
+					$pqtys[$item->getProductId()] = 'QTY'.$i.'='.number_format($item->getQtyOrdered(),0);
+					$pprices[$item->getProductId()] = 'TOTALAMOUNT'.$i.'='.$total_d;
+					
+				}
+                
+							
+				$skuspipe = implode("&", $pskus);
+				$qtyspipe = implode("&", $pqtys);
+				$pricespipe = implode("&", $pprices);
+	                        
+            ?>		  
+              <!-- Pepper Jam Start -->
+
+             <iframe src="https://t.pepperjamnetwork.com/track?PID=5313&AMOUNT=<?php echo $amount ?>&TYPE=1&OID=<?php echo $this->getOrderId(); ?>&CURRENCY=USD" height="1" width="1" frameborder="0">
+             </iframe>
+			 <iframe src="https://t.pepperjamnetwork.com/track?PID=6217&INT=ITEMIZED&<?php echo $skuspipe; ?>&<?php echo $qtyspipe; ?>&<?php echo $pricespipe; ?>&OID=<?php echo $this->getOrderId(); ?>" width="1" height="1" frameborder="0"></iframe> 
+			 
+             <!-- Pepper Jam End -->
+			 
+             <?php } elseif ($_COOKIE['gateway']=='lks') { ?>
+			 
+			 <?php
+				$pqtys = array();
+				$pprices = array();
+				$pnames = array();
+				$pqskus = array();
+				
+				foreach ($order->getAllItems() as $item){ 
+					$pskus[$item->getProductId()] = $item->getSku();
+					$pqtys[$item->getProductId()] = $item->getQtyOrdered();
+					$pprices[$item->getProductId()] = $item->getPrice()*$item->getQtyOrdered()*100;
+					$pnames[$item->getProductId()] = $item->getName();
+					
+				}
+					  
+				$skuspipe = implode("|", $pskus);
+				$namespipe = implode("|", $pnames);
+				$qtyspipe = implode("|", $pqtys);
+				$pricespipe = implode("|", $pprices);
+	            $disc = $_discount*100;
+				
+	            if ($_discount != 0) {
+				   $skuspipe .= '|Discount';
+				   $namespipe .= '|Discount';
+				   $qtyspipe .= '|0';
+				   $pricespipe .= '|'.$disc;
+				   
+				}
+              ?>		  
+              <!-- LinkShare START-->
+              
+              <img src="https://track.linksynergy.com/ep?mid=37305&ord=<?php echo $this->getOrderId(); ?>&skulist=<?php echo $skuspipe; ?>&qlist=<?php echo $qtyspipe; ?>&amtlist=<?php echo $pricespipe; ?>&cur=USD&namelist=<?php echo $namespipe; ?>"/>
+              <!-- LinkShare END-->
+			  
+			  <?php }?>
+			 
+              <!-- Pronto Start -->
+              <script type="text/javascript" language="javascript">
+                var merchant_account_id = '99133';
+              </script>
+              <script type="text/javascript" language="javascript" src="https://merchant.pronto.com/js/roi.js"></script>
+              <!-- Pronto End -->
+
+			  <?php 
+					$skus = array();
+					$qtys = array();
+					$prices = array();
+					$amounts = array();
+			    foreach ($order->getAllItems() as $item){ 
+    			    $skus[$item->getProductId()] = $item->getSku();
+					$qtys[$item->getProductId()] = $item->getQtyOrdered();
+					$prices[$item->getProductId()] = $item->getPrice();
+					$names[$item->getProductId()] = $item->getName();
+					
+			   } ?>
+			   
+              <!--START Shopping.com ROI tracker -->
+
+              <script language="JavaScript">
+                var merchant_id = '457839'
+                var order_id = '<?php echo $this->getOrderId(); ?>'
+                var order_amt = '<?php echo $amount ?>'
+                var category_id = '<?php echo $names[1];?>'
+                var category_name = '<?php echo $names[1];?>'
+                var product_id = '<?php echo $skus[1];?>'
+                var product_name = '<?php echo $names[1];?>'
+              </script>
+              <script language="JavaScript" src="https://stat.DealTime.com/ROI/ROI.js?mid=457839"></script>
+
+              <!--END Shopping.com ROI tracker -->
+
+              <!-- Smarter Code for Purchase Conversion Page Start-->
+
+              <script language="JavaScript" type="text/javascript">
+
+                var sm_mer_id = 44751;
+
+                var sm_advance = 1;
+
+                var sm_order_id = '<?php echo $this->getOrderId(); ?>';
+
+                var sm_order_amt = '<?php echo $amount ?>';
+
+                var sm_units_ordered = '<?php echo $_qty ?>';
+
+              </script>
+
+              <script language="JavaScript" src="https://sam.smarter.com/roi/js/conversion.js"></script>
+
+              <!-- Smarter Code End -->
+
+              <!--START NexTag ROI tracker -->
+              <script type="text/javascript">
+               
+                var id = '4172399';
+                var rev = '<?php echo $amount ?>';
+                var order = '<?php echo $this->getOrderId(); ?>';
+                var cats = '<?php echo $premium;?>';
+                var prods = '<?php echo $names[1];?>';
+                var units = '<?php echo $_qty; ?>';
+
+              </script>
+              <script type="text/javascript" src="https://imgsrv.nextag.com/imagefiles/includes/roitrack.js"></script>
+
+              <script language="javascript">
+                               
+	                /* Performance Tracking Data */
+	                var mid            = '192110';
+	                var cust_type      = '1';
+	                var order_value    = '<?php echo $amount; ?>';
+	                var order_id       = '<?php echo $this->getOrderId(); ?>';
+	                var units_ordered  = '<?php echo $_qty; ?>';
+
+              </script>
+              <script language="javascript" src="https://www.shopzilla.com/css/roi_tracker.js"></script>
+              <!--END NexTag ROI tracker -->
+
+			  <!--START AdRoll -->
+			  <script type="text/javascript">
+               adroll_conversion_value_in_dollars = <?php echo $amount; ?>;
+               adroll_custom_data = {'ORDER_ID': '<?php echo $this->getOrderId(); ?>', 'USER_ID':'<?php echo $customerid; ?>'}
+              </script>
+              <!--END AdRoll -->
+			  
+              <!-- START PriceGrabber CTS Code -->
+                                          
+               			 
+              <img src="https://www.pricegrabber.com/conversion.php?retid=12934"/>
+
+              <!-- END   PriceGrabber CTS Code -->
+             <?php 
+			   $groupon = false;
+			   foreach ($order->getAllItems() as $item){ 
+			       if ($item->getName() == 'Groupon Deal') {
+				    $groupon = true; }
+			   }		
+			 ?>
+			 <?php if ($groupon == true) {?>
+   			 <script language="JavaScript">
+			    surveyOpen('http://www.gothamcigars.com/forms/survey/index.php', 850, 650);
+			 </script>
+			 <?php } else {?>
+			 
+             <?php if (date('s')<15) { ?>
+			 
+			 <!--  Start of bizrate Code -->
+                <script language="JavaScript">
+                  var passin_x = 500; var passin_y = 150;
+                </script>
+				<script type="text/javascript" src="https://eval.bizrate.com/js/pos_192110.js"> </script>
+			 
+			 
+             <?php } elseif (date('s')<30 and date('s')>14) { ?>
+				
+				<link rel="stylesheet" href="https://merchants.nextag.com/serv/main/buyer/dhtmlpopup/dhtmlwindow.css" type="text/css" />
+				<script type="text/javascript">
+					var seller_id = 4172399;
+					//popup_left and popup_top default to the center of browser window if commented
+				    var popup_left=500;
+					var popup_top=150;
+					var popup_width=345; // default 345
+					var popup_height=205; // default 205
+					var popup_resize=0; // default 0
+				document.write('<'+ 'script type="text/javascript" src="https://merchants.nextag.com/seller/review/popup_include.js"><\/script>'); </script> 
+
+             <?php } elseif (date('s')<45 and date('s')>29) {?>
+               
+			    <!--  Start of bizrate Code -->
+                <script language="JavaScript">
+                  var passin_x = 500; var passin_y = 150;
+                </script>
+				<script type="text/javascript" src="https://eval.bizrate.com/js/pos_192110.js"> </script>
+			
+             <?php } elseif (date('s')>44) { ?>
+			  
+			   <script type="text/javascript"><!--
+                // Adjust the values of popup_pos_x, popup_pos_y to change the location of the popup layer on your confirmation page
+                popup_pos_x=500;
+                popup_pos_y=150;
+				// fill in the order number below
+				popup_order_number = '<?php echo $this->getOrderId(); ?>';
+				// fill in the email address below
+				popup_email = '<?php echo $email; ?>';
+				//-->
+				</script>
+			<!-- PriceGrabber Merchant Evaluation Code -->
+				<script type="text/javascript" charset="UTF-8" src="https://www.pricegrabber.com/rating_merchrevpopjs.php?retid=12934"></script>
+				<noscript><a href="https://www.pricegrabber.com/rating_merchrev.php?retid=12934" target=_blank>
+				<img src="https://images.pricegrabber.com/images/mr_noprize.jpg" border="0" width="272" height="238" alt="Merchant Evaluation"></a></noscript>
+			<!-- End PriceGrabber Code --> 
+               
+             
+			 <?php } } ?>
+			 
+			  <!-- Start of bizrate Code -->
+                <script language="JavaScript">
+                  var passin_x = 500; var passin_y = 150;
+                </script>
+				<script type="text/javascript" src="https://eval.bizrate.com/js/pos_192110.js"> </script>
+                
+				<script language="JavaScript">
+                  var br_cartzip = 'Q113198= <?php echo $amount; ?>';
+                </script>
+
+               
+              <!-- End of bizrate Code -->
+
+              <!-- Google Code for Sale Conversion Page -->
+               
+              <script type="text/javascript">
+                 
+                    var google_conversion_id = 1064467793;
+                    var google_conversion_language = "en_US";
+                    var google_conversion_format = "1";
+                    var google_conversion_color = "ffffff";
+                    var google_conversion_label = "-SUBCN_mvQEQ0frJ-wM";
+                   
+                </script>
+                <script type="text/javascript" src="https://www.googleadservices.com/pagead/conversion.js"></script>
+
+              <noscript>
+                <div style="display:inline;">
+                  <img height="1" width="1" style="border-style:none;" alt="" src="https://www.googleadservices.com/pagead/conversion/1064467793/?label=-SUBCN_mvQEQ0frJ-wM&guid=ON&script=0"/>
+                </div>
+              </noscript>
+			  
+			  <!-- CrushAds START -->
+              <iframe src="http://crshtrk.com/p.ashx?o=2476&t=<?php echo $this->getOrderId(); ?>" height="1" width="1" frameborder="0"></iframe>
+              <!-- CrushAds END -->
+                            
+              <!-- MadiaForge START -->
+              <script type="text/javascript" src="https://tags.mediaforge.com/js/361/?orderNumber=<?php echo $this->getOrderId(); ?>&price=<?php echo $amount; ?>"></script>
+              <!-- MadiaForge END -->
+
+              <!-- Vcapture START-->
+              <script type="text/javascript">var journeycode='78b0d5f6-c07d-45f9-9f06-8a6f9af55994';var captureConfigUrl='cdsusa.veinteractive.com/CaptureConfigService.asmx/CaptureConfig'; (function() {     var ve = document.createElement('script'); ve.type = 'text/javascript'; ve.async = true;     ve.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'configusa.veinteractive.com/vecapturev7.js';     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ve, s);})();</script>
+              <!-- Vcapture END-->
+
+			  <!--Ve Interactive Pixel Start-->
+				<img src="https://cdsusa.veinteractive.com/DataReceiverService.asmx/Pixel?journeycode=78b0d5f6-c07d-45f9-9f06-8a6f9af55994" width="1" height="1" />
+		      <!--Ve Interactive Pixel End-->
+
+              <script type="text/javascript">
+                var biJsHost = (("https:" == document.location.protocol) ? "https://" : "http://");
+                document.write(unescape("%3Cscript src='" + biJsHost + "s1.listrakbi.com/scripts/script.js?m=22Sm38Fd3nKV&v=1' type='text/javascript'%3E%3C/script%3E"));
+              </script>
+              			  
+			  <!-- BEGIN: buySAFE Guarantee -->
+				<span id="BuySafeGuaranteeSpan"></span>
+				<script src="https://seal.buysafe.com/private/rollover/rollover.js"></script>
+				<script type="text/javascript">
+				   buySAFE.Hash = 'V1wSnzr6D0orvF5gh0UlmmgCG2vnJrM5MeQmA%2BjsbKNPSP%2BHXEJpV%2FSLTRhob6r4n05Ce8HvcObEX3RXFH7Zrw%3D%3D';
+				   buySAFE.Guarantee.order = '<?php echo $this->getOrderId(); ?>'; //Order Number
+				   buySAFE.Guarantee.total = '<?php echo $amount; ?>'; // Order Amount 
+				   buySAFE.Guarantee.email = '<?php echo $email; ?>';
+				   WriteBuySafeGuarantee("JavaScript");
+				</script>
+              <!-- END: buySAFE Guarantee -->
+			  
+<?php if ($this->getOrderId()):?>
+<?php if ($this->getCanViewOrder()) :?>
+    <p style="font-size:12px;"><?php echo $this->__('Your order # is: %s.', sprintf('<a href="%s">%s</a>', $this->escapeHtml($this->getViewOrderUrl()), $this->escapeHtml($this->getOrderId()))) ?></p>
+<?php  else :?>
+<p style="font-size:12px;"><?php echo $this->__('Your order # is: %s.', $this->escapeHtml($this->getOrderId())) ?></p>
+<?php endif;?>
+<p style="font-size:12px;"><?php echo $this->__('You will receive an order confirmation email with details of your order and a link to track its progress.') ?></p>
+<?php if ($this->getCanViewOrder() && $this->getCanPrintOrder()) :?>
+<p style="font-size:12px;">
+        <?php echo $this->__('Click <a href="%s" onclick="this.target=\'_blank\'">here to print</a> a copy of your order confirmation.', $this->getPrintUrl()) ?>
+        <?php echo $this->getChildHtml() ?>
+    </p>
+<?php endif;?>
+<?php endif;?>
+
+<?php if ($this->getAgreementRefId()): ?>
+<p style="font-size:12px;'"><?php echo $this->__('Your billing agreement # is: %s.', sprintf('<a href="%s">%s</a>', $this->escapeHtml($this->getAgreementUrl()), $this->escapeHtml($this->getAgreementRefId())))?></p>
+<?php endif;?>
+
+<?php if ($profiles = $this->getRecurringProfiles()):?>
+<p style="font-size:12px;"><?php echo $this->__('Your recurring payment profiles:'); ?></p>
+<ul class="disc">
+<?php foreach($profiles as $profile):?>
+<?php $profileIdHtml = ($this->getCanViewProfiles() ? sprintf('<a href="%s">%s</a>', $this->escapeHtml($this->getProfileUrl($profile)), $this->escapeHtml($this->getObjectData($profile, 'reference_id'))) : $this->escapeHtml($this->getObjectData($profile, 'reference_id')));?>
+    <li><?php echo $this->__('Payment profile # %s: "%s".', $profileIdHtml, $this->escapeHtml($this->getObjectData($profile, 'schedule_description')))?></li>
+<?php endforeach;?>
+</ul>
+<?php endif;?>
+
+<br/>
+<br/>
+				
+				<br/>
+				<br/>
+<span style="font-size: 10pt;">
+                If you have any questions about your shipment, you may contact our customer service department at 855-5-GOTHAM (546-8426), between the hours of 9:00 am and 5:30 pm EST Monday through Friday or via email at <a href="<?php echo $this->getUrl('contacts') ?>">info@gothamcigars.com</a><br/><br/>
+                Thank you again for your order.
+              </span>
+			  
+			  
+<div class="buttons-set">
+    <button type="button" class="button" title="<?php echo $this->__('Continue Shopping') ?>" onclick="window.location='<?php echo $this->getUrl() ?>'"><span><span><?php echo $this->__('Continue Shopping') ?></span></span></button>
+</div>
+
+

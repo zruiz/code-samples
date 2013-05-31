@@ -1,0 +1,74 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     enterprise_default
+ * @copyright   Copyright (c) 2011 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+?>
+<?php
+/**
+ * Category layered navigation
+ *
+ * @see Mage_Catalog_Block_Layer_View
+ */
+?>
+<style type="text/css">
+
+</style>
+<?php if($this->canShowBlock()): ?>
+<div id="browseCategory" style="margin-bottom: 5px;">
+	<div class="leftHeadingWrap"><?php echo $this->__('Refine Your Results') ?></div>
+	<div class="leftWhiteBox">
+	<div class="menu_list ">
+	
+    <?php echo $this->getStateHtml() ?>
+    <?php if($this->canShowOptions()): ?>
+            <!--<div class="cateuserInfo">
+              <div class="elmRow"><strong><?php echo $this->__('Shopping Options') ?><strong></div>
+			</div>-->
+            <?php $_filters = $this->getFilters() ?>
+                <?php foreach ($_filters as $_filter): ?>
+                <?php if($_filter->getItemsCount()): ?>
+				<?php if($_filter->getName() == 'Category'): ?>
+                    <p style="font-weight:bold; color:#9D0501; text-transform: uppercase; margin-bottom: 0; margin-left: 3px;">Cigar Brand</p>
+				<?php else: ?>	
+				    <p style="font-weight:bold; color:#9D0501; text-transform: uppercase; margin-bottom: 0; margin-left: 3px;"><?php echo $this->__($_filter->getName()) ?></p>
+				<?php endif;?>
+                    <?php if($_filter->getName() == 'Country Origin' or $_filter->getName() == 'Price' or $_filter->getName() == 'Strength' or $_filter->getName() == 'Tube' or $_filter->getName() == 'Cigar Type'): ?>
+					<div class="menu_body" style="display:block;  padding-bottom: 1px;"><?php echo $_filter->getHtml() ?></div>
+					<?php else: ?>
+					  <?php if($_filter->getItemsCount() < 6): ?>
+					  <div class="menu_body" style="display:block; padding-bottom: 1px;"><?php echo $_filter->getHtml() ?></div>
+					  <?php else: ?>	
+					<div id="text_scroll_nav">
+					<div class="menu_body" style="display:block;"><?php echo $_filter->getHtml() ?></div>
+					</div>
+					<?php endif; ?>
+					<?php endif; ?>
+                <?php endif; ?>
+                <?php endforeach; ?>
+            <script type="text/javascript">decorateDataList('narrow-by-list')</script>
+    <?php endif; ?>
+	</div>
+	</div>
+</div>
+<?php endif; ?>

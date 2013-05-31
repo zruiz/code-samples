@@ -1,0 +1,233 @@
+<?php /* ?><div>
+<div class="hadding_bg"><img src="<?php echo $this->getSkinUrl('images/pro_img.png'); ?>" alt="" />Product Category</div>
+<div class="proList">
+    <ul>
+    	<?php foreach ($this->getStoreCategories(true) as $_category): ?>
+    		<?php echo $this->drawItem($_category) ?>
+    	<?php endforeach ?>
+    </ul>
+</div>
+<div class="bg_botimg">&nbsp;</div>
+</div>
+<?php */ ?>
+
+
+<?php if (Mage::getModel('catalog/layer')->getCurrentCategory()->getId() == 548): ?>
+<?php else: ?>
+
+<div class="searchspring-facets_container" ></div>
+<div style="clear:both;"></div>
+
+
+<div id="browseCategory" style="padding-bottom:5px;display:none;">
+          <div class="leftHeadingWrap" style="">Search By Cigar Filters</div>
+          <div class="leftWhiteBox">
+		  <div class="menu_body" style="display:block;">
+		  <ul>
+		   <li> <a href="<?php echo $this->getUrl('') ?>search.html">Go To Cigar Search Page </a></li>
+		  </ul> 
+		  </div>
+		  </div>
+</div>
+
+<div id="browseCategory" style="display:none;">
+          <div class="leftHeadingWrap">Browse By Main Brands</div>
+          <div class="leftWhiteBox">
+            <div class="cateuserInfo">
+              <div class="elmRow"> Click <img src="<?php echo $this->getSkinUrl('images/bullet-plus.png'); ?>" alt="" /> Expand Cigar Category</div>
+              <div class="elmRow">Click <img src="<?php echo $this->getSkinUrl('images/bullet-minus.png'); ?>" alt="" /> Contract Cigar Category </div>
+            </div>
+            <div class="menu_list " id="firstpane">
+              <p class="menu_head">Premium Cigars</p>
+              <div class="menu_body">
+                <ul>
+				<?php
+					$cur_cat = Mage::getModel('catalog/category')->load('3');
+					$helper    = $this->helper('catalog/output');	
+					//$cur_cat = $this->getCurrentCategory();
+					/* @var $category Mage_Catalog_Model_Category */
+					$subcategories = Mage::getModel('catalog/category')->getCollection();
+					/* @var $collection Mage_Catalog_Model_Resource_Eav_Mysql4_Category_Collection */
+					$subcategories->addAttributeToSelect('url_key')
+						->addAttributeToSelect('name')
+						->addAttributeToFilter('is_active', 1)
+						->addIdFilter($cur_cat->getChildren())
+						->joinUrlRewrite()
+						->addAttributeToSort('name', 'asc')
+						->load();
+				
+					foreach($subcategories as $_category) { 
+					  //$_category = Mage::getModel('catalog/category')->load($subCatid);
+					  //$_category = Mage::getModel( 'catalog/category' )->load($_subcategory->getId()); 
+					//if($_category->getIsActive())
+					//{
+					?>
+					<li><a href="<?php echo $_category->getURL(); ?>"><?php echo $_category->getName(); ?></a></li>
+					<?php //}
+					}
+				?>
+				<?php //echo $this->drawItem($cat) ?>
+				  
+                </ul>
+              </div>
+              <p class="menu_head">Machine Made Cigars</p>
+              <div class="menu_body">
+                <ul>
+                  <?php 
+					/*$cat = Mage::getModel('catalog/category')->load('4');
+					$subcats = $cat->getChildren();
+					
+					foreach(explode(',',$subcats) as $subCatid)
+					{
+					  $_category = Mage::getModel('catalog/category')->load($subCatid);
+					if($_category->getIsActive())
+					  {
+					?>
+					<li><a href="<?php echo $_category->getURL(); ?>"><?php echo $_category->getName(); ?></a></li>
+					<?php }
+					}*/
+				?>
+				
+				<?php
+					$cur_cat = Mage::getModel('catalog/category')->load('4');
+					$helper    = $this->helper('catalog/output');	
+					//$cur_cat = $this->getCurrentCategory();
+					/* @var $category Mage_Catalog_Model_Category */
+					$subcategories = Mage::getModel('catalog/category')->getCollection();
+					/* @var $collection Mage_Catalog_Model_Resource_Eav_Mysql4_Category_Collection */
+					$subcategories->addAttributeToSelect('url_key')
+						->addAttributeToSelect('name')
+						->addAttributeToFilter('is_active', 1)
+						->addIdFilter($cur_cat->getChildren())
+						->joinUrlRewrite()
+						->addAttributeToSort('name', 'asc')
+						->load();
+				
+					foreach($subcategories as $_category) { 
+					  //$_category = Mage::getModel('catalog/category')->load($subCatid);
+					  //$_category = Mage::getModel( 'catalog/category' )->load($_subcategory->getId()); 
+					//if($_category->getIsActive())
+					//{
+					?>
+					<li><a href="<?php echo $_category->getURL(); ?>"><?php echo $_category->getName(); ?></a></li>
+					<?php //}
+					}
+				?>
+                </ul>
+              </div>
+              <p class="menu_head">Little Cigars</p>
+              <div class="menu_body">
+                <ul>
+                  <?php 
+					/*$cat = Mage::getModel('catalog/category')->load('7');
+					$subcats = $cat->getChildren();
+					
+					foreach(explode(',',$subcats) as $subCatid)
+					{
+					  $_category = Mage::getModel('catalog/category')->load($subCatid);
+					if($_category->getIsActive())
+					  {
+					?>
+					<li><a href="<?php echo $_category->getURL(); ?>"><?php echo $_category->getName(); ?></a></li>
+					<?php }
+					}*/
+				?>
+				<?php
+					$cur_cat = Mage::getModel('catalog/category')->load('7');
+					$helper    = $this->helper('catalog/output');	
+					//$cur_cat = $this->getCurrentCategory();
+					/* @var $category Mage_Catalog_Model_Category */
+					$subcategories = Mage::getModel('catalog/category')->getCollection();
+					/* @var $collection Mage_Catalog_Model_Resource_Eav_Mysql4_Category_Collection */
+					$subcategories->addAttributeToSelect('url_key')
+						->addAttributeToSelect('name')
+						->addAttributeToFilter('is_active', 1)
+						->addIdFilter($cur_cat->getChildren())
+						->joinUrlRewrite()
+						->addAttributeToSort('name', 'asc')
+						->load();
+				
+					foreach($subcategories as $_category) { 
+					  //$_category = Mage::getModel('catalog/category')->load($subCatid);
+					  //$_category = Mage::getModel( 'catalog/category' )->load($_subcategory->getId()); 
+					//if($_category->getIsActive())
+					//{
+					?>
+					<li><a href="<?php echo $_category->getURL(); ?>"><?php echo $_category->getName(); ?></a></li>
+					<?php //}
+					}
+				?>
+                </ul>
+              </div>
+              <p class="menu_head">Filtered Cigars</p>
+              <div class="menu_body">
+                <ul>
+                  <?php 
+					/*$cat = Mage::getModel('catalog/category')->load('8');
+					$subcats = $cat->getChildren();
+					
+					foreach(explode(',',$subcats) as $subCatid)
+					{
+					  $_category = Mage::getModel('catalog/category')->load($subCatid);
+					if($_category->getIsActive())
+					  {
+					?>
+					<li><a href="<?php echo $_category->getURL(); ?>"><?php echo $_category->getName(); ?></a></li>
+					<?php }
+					}*/
+				?>
+				<?php
+					$cur_cat = Mage::getModel('catalog/category')->load('8');
+					$helper    = $this->helper('catalog/output');	
+					//$cur_cat = $this->getCurrentCategory();
+					/* @var $category Mage_Catalog_Model_Category */
+					$subcategories = Mage::getModel('catalog/category')->getCollection();
+					/* @var $collection Mage_Catalog_Model_Resource_Eav_Mysql4_Category_Collection */
+					$subcategories->addAttributeToSelect('url_key')
+						->addAttributeToSelect('name')
+						->addAttributeToFilter('is_active', 1)
+						->addIdFilter($cur_cat->getChildren())
+						->joinUrlRewrite()
+						->addAttributeToSort('name', 'asc')
+						->load();
+				
+					foreach($subcategories as $_category) { 
+					  //$_category = Mage::getModel('catalog/category')->load($subCatid);
+					  //$_category = Mage::getModel( 'catalog/category' )->load($_subcategory->getId()); 
+					//if($_category->getIsActive())
+					//{
+					?>
+					<li><a href="<?php echo $_category->getURL(); ?>"><?php echo $_category->getName(); ?></a></li>
+					<?php //}
+					}
+				?>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+		<?php endif;?>
+        <div class="leftBannerWrap">
+          <div class="leftWhiteBox"> <img style="cursor:pointer;" src="<?php echo $this->getSkinUrl('images/email_signup.jpg'); ?>"  alt="" onclick="javascript:surveyOpen('http://www.gothamcigars.com/forms/survey/index.html', 850, 650);" /> 
+		  <a href="<?php echo $this->getUrl('') ?>cigars/top-cigars-rated-90.html"> <img src="<?php echo $this->getSkinUrl('images/banner-shop-now.jpg'); ?>" class="mt17"  alt="" /></a></div>
+        </div>
+		<?php if (Mage::getModel('catalog/layer')->getCurrentCategory()->getId() == 548): ?>
+        <?php else: ?>
+        <div class="leftBannerWrap">
+          <div class="leftWhiteBox"> <a href="<?php echo $this->getUrl('') ?>cigars/cigar-tins.html"><img src="<?php echo $this->getSkinUrl('images/banner-cigar-tin.jpg'); ?>"  alt="" /></a> </div>
+        </div>
+        <div class="leftBannerWrap">
+          <div class="leftHeadingWrap">Check Out Our Humidors</div>
+          <div class="leftWhiteBox"> <a href="http://www.gothamhumidors.com/" target="_blank"><img src="<?php echo $this->getSkinUrl('images/humidorsbanner.gif'); ?>"  alt="" /></a> </div>
+        </div>
+		<div class="leftBannerWrap">
+		<div class="leftHeadingWrap">Store Rating</div>
+		<div class="leftWhiteBox">
+		<div style="text-align: center; padding:5px;">
+            <div itemtype="http://data-vocabulary.org/Review-aggregate" itemscope="">
+                <span itemprop="itemreviewed">Gotham Cigars</span> <span itemtype="http://data-vocabulary.org/Rating"
+                    itemscope="" itemprop="rating"> is rated <span itemprop="average">4.8</span>/<span itemprop="best">5</span></span> based on more than <span itemprop="votes">8100</span> votes.</div>
+        </div>
+		</div>
+		</div>
+        <?php endif;?>

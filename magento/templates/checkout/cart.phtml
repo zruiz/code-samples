@@ -1,0 +1,196 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     enterprise_default
+ * @copyright   Copyright (c) 2011 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+?>
+<?php
+/**
+ * Shopping cart template
+ *
+ * @see Mage_Checkout_Block_Cart
+ */
+?>
+<div class="cart">
+    <div class="page-title title-buttons">
+        <h1><?php echo $this->__('Shopping Cart') ?></h1>
+        <?php /*if(!$this->hasError()): ?>
+        <ul class="checkout-types">
+        <?php foreach ($this->getMethods('top_methods') as $method): ?>
+            <?php if ($methodHtml = $this->getMethodHtml($method)): ?>
+            <li><?php echo $methodHtml; ?></li>
+            <?php endif; ?>
+        <?php endforeach; ?>
+        </ul>
+        <?php endif;*/ ?>
+    </div>
+  <span id="buySAFE_Kicker" name="buySAFE_Kicker" type="Kicker Guaranteed Greyscale 465x45"></span>
+    <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+    <?php echo $this->getChildHtml('form_before') ?>
+    <form action="<?php echo $this->getUrl('checkout/cart/updatePost') ?>" method="post">
+        <fieldset>
+            <table id="shopping-cart-table" class="data-table cart-table">
+                <col width="1" />
+                <col />
+                <col width="1" />
+            <?php if ($this->helper('wishlist')->isAllowInCart()) : ?>
+                <col width="1" />
+            <?php endif ?>
+            <?php if ($this->helper('tax')->displayCartPriceExclTax() || $this->helper('tax')->displayCartBothPrices()): ?>
+                <col width="1" />
+            <?php endif; ?>
+            <?php if ($this->helper('tax')->displayCartPriceInclTax() || $this->helper('tax')->displayCartBothPrices()): ?>
+                <col width="1" />
+            <?php endif; ?>
+                <col width="1" />
+            <?php if ($this->helper('tax')->displayCartPriceExclTax() || $this->helper('tax')->displayCartBothPrices()): ?>
+                <col width="1" />
+            <?php endif; ?>
+            <?php if ($this->helper('tax')->displayCartPriceInclTax() || $this->helper('tax')->displayCartBothPrices()): ?>
+                <col width="1" />
+            <?php endif; ?>
+                <col width="1" />
+
+            <?php $mergedCells = ($this->helper('tax')->displayCartBothPrices() ? 2 : 1); ?>
+                <thead>
+                    <tr>
+                        <th class="firstcolm" rowspan="<?php echo $mergedCells; ?>">&nbsp;</th>
+                        <th class="colm2" rowspan="<?php echo $mergedCells; ?>"><span class="nobr"><?php echo $this->__('Product Name') ?></span></th>
+                        <!-- <th class="colm2" rowspan="<?php echo $mergedCells; ?>"></th> -->
+                        <?php if ($this->helper('wishlist')->isAllowInCart()) : ?>
+                        <th class="colm2" rowspan="<?php echo $mergedCells; ?>" class="a-center"><span class="nobr"><?php echo $this->__('Move to Wishlist') ?></span></th>
+                        <?php endif ?>
+                        <th class="colm2" class="a-center" colspan="<?php echo $mergedCells; ?>"><span class="nobr"><?php echo $this->__('Unit Price') ?></span></th>
+                        <th class="colm2" rowspan="<?php echo $mergedCells; ?>" class="a-center"><?php echo $this->__('Qty') ?></th>
+                        <th class="colm2" class="a-center" colspan="<?php echo $mergedCells; ?>"><?php echo $this->__('Subtotal') ?></th>
+                        <th class="lastcolm" rowspan="<?php echo $mergedCells; ?>" class="a-center"><?php echo $this->__('Remove') ?></th>
+                    </tr>
+                    <?php if ($this->helper('tax')->displayCartBothPrices()): ?>
+                    <tr>
+                        <th class="a-right"><?php echo $this->helper('tax')->getIncExcTaxLabel(false) ?></th>
+                        <th><?php echo $this->helper('tax')->getIncExcTaxLabel(true) ?></th>
+                        <th class="a-right"><?php echo $this->helper('tax')->getIncExcTaxLabel(false) ?></th>
+                        <th><?php echo $this->helper('tax')->getIncExcTaxLabel(true) ?></th>
+                    </tr>
+                    <?php endif; ?>
+                </thead>
+                <tfoot>
+                <!-- Ulises AUTOADD -->
+                <?php echo Mage::helper('autoadd')->getExtraProducts();?>
+                    <tr>
+                        <td colspan="50" class="a-right" style="border-right: 1px solid #DABE7A;">
+                            <?php if($this->getContinueShoppingUrl()): ?>
+                                <?php /* ?><button type="button" title="<?php echo $this->__('Continue Shopping') ?>" class="button btn-continue" onclick="setLocation('<?php echo $this->getContinueShoppingUrl() ?>')"><span><span><?php echo $this->__('Continue Shopping') ?></span></span></button><?php */ ?>
+                    <a href="javascript:void(0);" class="button btn-continue" onclick="setLocation('<?php echo $this->getContinueShoppingUrl() ?>')" title="<?php echo $this->__('Continue Shopping') ?>"><img src="<?php echo $this->getSkinUrl('images/bt-continueshopping.jpg') ?>"  alt="<?php echo $this->__('Continue Shopping') ?>" /></a>
+                            <?php endif; ?>
+                            <button type="submit" title="<?php echo $this->__('Update Shopping Cart') ?>" class="button_blue_new btn-update"><span><span><?php echo $this->__('Update Shopping Cart') ?></span></span></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="border: none;">
+                           <div style="width: 100%; overflow: hidden;" >
+
+                              <div style="width: 120px; float: left; overflow: hidden;">
+                    <a href="<?php echo $this->getUrl('') ?>" style="color:blue">Home Page</a><br/>
+                    <a href="<?php echo $this->getUrl('') ?>cigars/premium-cigars.html" style="color:blue">Premium Cigars</a><br/>
+                    <a href="<?php echo $this->getUrl('') ?>cigar-humidors.html" style="color:blue">Cigar Humidors</a><br/>
+                    <a href="<?php echo $this->getUrl('') ?>cigar-samplers.html" style="color:blue">Cigar Samplers</a><br/>
+                    <a href="<?php echo $this->getUrl('') ?>5-pack-tastings.html" style="color:blue">5 Pack Tastings</a>
+                    </div>
+                    <div style="float: left; overflow: hidden;">
+                    <a href="Javascript:history.go(-1)" style="color:blue">Previous Page</a><br/>
+                    <a href="<?php echo $this->getUrl('') ?>cigars/machine-made-cigars.html" style="color:blue">Machine Made Cigars</a><br/>
+                    <a href="<?php echo $this->getUrl('') ?>cigars/little-cigars.html" style="color:blue">Little Cigars</a>  <br/>
+                    <a href="<?php echo $this->getUrl('') ?>cigars/filtered-cigars.html" style="color:blue">Filtered Cigars</a>  <br/>
+                    <a href="<?php echo $this->getUrl('') ?>cigar-accessories.html" style="color:blue">Cigar Accessories</a></div>
+                    </div>
+                     </td>
+           <td colspan="48" style="border-right: 1px solid #DABE7A;">&nbsp;</td>
+                    </tr>
+                </tfoot>
+                <tbody>
+        <?php $cart = Mage::getModel('checkout/cart')->getQuote();?>
+
+        <?php $_spend = 0 ?>
+		<?php $i = 0 ?>
+		<?php $_coupon = $cart->getCouponCode(); ?>
+        <?php $_subtotal = $cart->getsubtotal_with_discount(); ?>
+		<?php $fsubtotal = number_format($cart->getsubtotal_with_discount(),2); ?>
+		<?php $pskus = array();?>
+        <?php foreach ($cart->getAllItems() as $item): ?>
+            <?php $_price = $item->getProduct()->getPrice(); ?>
+            <?php $_qty = $item->getProduct()->getSubtotal(); ?>
+			<?php $pskus[$i] = $item->getProduct()->getSku(); ?>
+			<?php $i += 1; ?>
+        <?php endforeach ?>
+		<?php $skuspipe = implode(",", $pskus);?>
+        <?php $_spend = 150 - $_subtotal ?>
+        <?php foreach($this->getItems() as $_item): ?>
+                    <?php echo $this->getItemHtml($_item) ?>
+        <?php endforeach ?>
+		
+		    </tbody>
+            </table>
+            <script type="text/javascript">decorateTable('shopping-cart-table')</script>
+			<script type="text/javascript" src="https://tags.mediaforge.com/js/361/?cart=<?php echo $fsubtotal; ?>&prodID=<?php echo $skuspipe; ?>"></script>
+        </fieldset>
+    </form>
+  <?php if ($_subtotal > 150): ?>
+  <div style="margin:0px 0px 0px 0px; width:100%; height:20px; padding:0px">
+     <p style="padding:5px; font-family:Verdana; font-size:12px; color:#FFFFFF; background-color:#009900; text-align:center">Congratulations <span style="font-size:14px; font-weight:bold">your entire order</span> qualifies for <span style="font-size:14px; font-weight:bold">FREE FEDEX GROUND SHIPPING</span></p>
+    </div>
+
+  <?php else: ?>
+  <div style="margin:0px 0px 0px 0px; width:100%; height:20px; padding:0px">
+     <p style="padding:5px; font-family:Verdana; font-size:12px; color:#FFFFFF; background-color:#CC3333; text-align:center">Spend just <span style="font-size:14px; font-weight:bold">$<?php echo $_spend ?></span> more to qualify for <span style="font-size:14px; font-weight:bold">FREE FEDEX GROUND SHIPPING</span> on your entire order</p>
+    </div>
+
+    <?php endif; ?>
+  <br/><span style="font-family:Verdana; font-size:11px; color:#666666">Please Note: Free Ground Shipping does not apply to orders shipped to Alaska, Hawaii, Puerto Rico, Guam and the U.S. Virgin Islands.</span> <br/>
+    <div class="totals">
+        <?php echo $this->getChildHtml('totals'); ?>
+        <?php if(!$this->hasError()): ?>
+        <ul class="checkout-types">
+        <?php foreach ($this->getMethods('methods') as $method): ?>
+            <?php if ($methodHtml = $this->getMethodHtml($method)): ?>
+            <li><?php echo $methodHtml; ?></li>
+            <?php endif; ?>
+        <?php endforeach; ?>
+        </ul>
+		<div style="text-align:; margin-bottom:10px; padding-left:100px;">
+		<script type="text/javascript">document.write('<scr');document.write('ipt type="text/javascript" data-ppmnid="22331118327163" src="//ad.where.com/jin/spotlight/ads?pubid=b0c916bc80&format=js&v=2.4&placementtype=190x100&ppmnid=22331118327163&rand=' + Math.round(Math.random() * 100000000000000) + '">');document.write('</scr' + 'ipt>');</script>
+		</div>
+        <?php endif; ?>
+    </div>
+    <div class="cart-collaterals<?php if($this->getChildHtml('crosssell')) echo ' cross-inside'; ?>">
+        <?php echo $this->getChildHtml('crosssell') ?>
+        <div class="deals">
+		<?php if ($_coupon !== "GPD24"){ ?>
+            <?php echo $this->getChildHtml('coupon') ?>
+	    <?php } ?>		
+            <?php echo $this->getChildHtml('giftcards') ?>
+        </div>
+        <?php //if (!$this->getIsVirtual()): echo $this->getChildHtml('shipping'); endif; ?>
+    </div>
+
+</div>

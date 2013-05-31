@@ -1,0 +1,1872 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ * /cigarsinternationals.com/html/app/design/frontend/enterprise/gotham/template/catalog/product
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     enterprise_default
+ * @copyright   Copyright (c) 2011 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+?>
+<?php
+/**
+ * Product list template
+ *
+ * @see Mage_Catalog_Block_Product_List
+ */
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+?>
+<?php
+    $_productCollection=$this->getLoadedProductCollection();
+    $_helper = $this->helper('catalog/output');
+?>
+<?php if(!$_productCollection->count()): ?>
+<?php else: ?>
+<div class="pagingWrap fr"><?php echo $this->getToolbarHtml() ?></div>
+<div class="clear"></div>
+<?php echo $this->getAdditionalHtml() ?>
+<div class="productTableWrap">
+          <div class="proTableHead">
+
+            <div class="colm1">Reviews</div>
+            <div class="colm2">Image</div>
+            <div class="colm3">Description</div>
+            <div class="colm4">Our Price</div>
+            <div class="clear"></div>
+
+          </div>
+    <?php // List mode ?>
+    <?php if($this->getMode()!='grid'): ?>
+    <?php $_iterator = 0; ?>
+    <div class="productTableCon">
+    <?php foreach ($_productCollection as $_product): ?>
+        <div class="productRow">
+    <div class="colm1">
+      <div class="userName"><?php echo $_helper->productAttribute($_product, $_product->getSku() , 'sku'); ?></div>
+      <div class="rating">
+      <?php //if($_product->getRatingSummary()): ?>
+         <a href="<?php echo $_product->getProductUrl() ?>#customer_reviews" title="<?php echo $_helper->productAttribute($_product, $_product->getName() , 'name');  ?>"><?php echo $this->getReviewsSummaryHtml($_product) ?></a>
+            <a href="<?php echo $_product->getProductUrl() ?>#review-form">Add Your Review</a>
+            <br />
+            <br />
+      <?php //endif;
+      ?>
+<center>
+       <?php
+              $proff = $_product->getAttributeText('pr_20_off');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($proff == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/pr_20_off.png\" border=0>";
+                             echo "<br />..";
+                            };
+          ?>
+      <?php
+              $closeout = $_product->getAttributeText('closeout');
+              $yes = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ($closeout == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/closeout.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $new_item = $_product->getAttributeText('new_item');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ($new_item == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/new.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $free_vertigo_lighter = $_product->getAttributeText('free_vertigo_lighter');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($free_vertigo_lighter == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/free_vertigo_lighter.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $sale_price = $_product->getAttributeText('sale_price');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ($sale_price == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/sale_price.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $buy_1_get_1 = $_product->getAttributeText('buy_1_get_1');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ($buy_1_get_1 == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/Buy1Get1.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $buy_10_get_10 = $_product->getAttributeText('buy_10_get_10');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ($buy_10_get_10 == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/buy10get10.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $buy_25_get_25 = $_product->getAttributeText('buy_25_get_25');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ($buy_25_get_25 == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/buy25get25.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $buy_40_get_10 = $_product->getAttributeText('buy_40_get_10');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ($buy_40_get_10 == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/buy40get10.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $buy_40_get_20 = $_product->getAttributeText('buy_40_get_20');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ($buy_40_get_20 == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/buy40get20.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $buy_50_get_10 = $_product->getAttributeText('buy_50_get_10');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ($buy_50_get_10 == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/buy50get10.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $buy_60_get_30 = $_product->getAttributeText('buy_60_get_30');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ($buy_60_get_30 == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/buy60get30.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $rated_90 = $_product->getAttributeText('rated_90');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ($rated_90 == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/rated_90.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $rated_91 = $_product->getAttributeText('rated_91');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ($rated_91 == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/rated_91.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $rated_92 = $_product->getAttributeText('rated_92');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ($rated_92 == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/rated_92.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $rated_93 = $_product->getAttributeText('rated_93');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ($rated_93 == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/rated_93.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $rated_94 = $_product->getAttributeText('rated_94');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ($rated_94 == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/rated_94.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $rated_95 = $_product->getAttributeText('rated_95');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ($rated_95 == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/rated_95.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $pack_5 = $_product->getAttributeText('pack_5');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ($pack_5 == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/5pk.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $off_10 = $_product->getAttributeText('off_10');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ($off_10 == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/10OFF.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $off_2 = $_product->getAttributeText('off_2');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ($off_2 == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/2OFF.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $off_5 = $_product->getAttributeText('off_5');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ($off_5 == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/5OFF.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $off_399 = $_product->getAttributeText('off_399');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ($off_399 == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/399OFF.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $off_20 = $_product->getAttributeText('off_20');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ($off_20 == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/20OFF.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $off_3 = $_product->getAttributeText('off_3');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ($off_3 == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/3OFF.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $free_hoyo = $_product->getAttributeText('free_hoyo');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ($free_hoyo == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/FreeHoyodeMonterreySampler.jpg\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $pack_alec = $_product->getAttributeText('pack_alec');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ($pack_alec == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/FreeAlec.jpg\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $free_cao = $_product->getAttributeText('free_cao');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ($free_cao == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/FreeCAOgift.jpg\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $three_off_5 = $_product->getAttributeText('three_off_5');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ($three_off_5 == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/3off5.jpg\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $two_off_10 = $_product->getAttributeText('two_off_10');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ($two_off_10 == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/2off10.jpg\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $two_off_5 = $_product->getAttributeText('two_off_5');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ($two_off_5 == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/2off5.jpg\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $two_off_6 = $_product->getAttributeText('two_off_6');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ($two_off_6 == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/2off6.jpg\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $two_off_5_minus = $_product->getAttributeText('two_off_5_minus');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ($two_off_5_minus == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/2off5-1.jpg\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $three_off_5_minus = $_product->getAttributeText('three_off_5_minus');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ($three_off_5_minus == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/3off5-1.jpg\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $two_off_10_minus = $_product->getAttributeText('two_off_10_minus');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ($two_off_10_minus == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/2off10-1.jpg\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+
+          <?php
+              $free_ab = $_product->getAttributeText('free_ab');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ($free_ab == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/FreeABMaxx4Pack.jpg\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $free_shipping_25 = $_product->getAttributeText('free_shipping_25');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ($free_shipping_25 == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/FreeShipping.jpg\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $off_6 = $_product->getAttributeText('off_6');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ($off_6 == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/6OFF.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $super_deal = $_product->getAttributeText('super_deal');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ($super_deal == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/SuperDeal8oFF.jpg\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $free_acid = $_product->getAttributeText('free_acid');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ($free_acid == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/FreeAcidKKCig5P.jpg\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $free_oliva = $_product->getAttributeText('free_oliva');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ($free_oliva == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/FreeOlivAshTRay.jpg\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $free_ab_tempus = $_product->getAttributeText('free_ab_tempus');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ($free_ab_tempus == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/FreeABTEmpus5P.jpg\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $closeout_20 = $_product->getAttributeText('closeout_20');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ($closeout_20 == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/20PrOFF.jpg\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $free_don_lino = $_product->getAttributeText('free_don_lino');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ($free_don_lino == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/FreeDonLinoAfrica.jpg\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $free_asti_humidor = $_product->getAttributeText('free_asti_humidor');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ($free_asti_humidor == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/FreeAstiHumidor.jpg\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $free_cao_last = $_product->getAttributeText('free_cao_last');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ($free_cao_last == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/FreeCAOstick.jpg\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $free_shipping = $_product->getAttributeText('free_shipping');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ($free_shipping == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/FreeShipping.jpg\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $fathers_day = $_product->getAttributeText('fathers_day');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ($fathers_day == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/FathersDaygift.jpg\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $free_oliva_sampler = $_product->getAttributeText('free_oliva_sampler');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($free_oliva_sampler == $left){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/free_oliva_sampler.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $off_25 = $_product->getAttributeText('off_25');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ($off_25 == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/25OFF.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $free_vertigo_lighter = $_product->getAttributeText('free_vertigo_lighter');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ($off_25 == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/free_vertigo_lighter.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $custom_1 = $_product->getAttributeText('custom_1');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ($custom_1 == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/custom_1.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $custom_2 = $_product->getAttributeText('custom_2');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ($custom_2 == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/custom_2.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $custom_3 = $_product->getAttributeText('custom_3');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ($custom_3 == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/custom_3.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $custom_4 = $_product->getAttributeText('custom_4');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ($custom_4 == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/custom_4.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $free_capri_humidor = $_product->getAttributeText('free_capri_humidor');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($free_capri_humidor == $left){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/free_capri_humidor.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $free_ab_hendrix_lighter = $_product->getAttributeText('free_ab_hendrix_lighter');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($free_ab_hendrix_lighter == $left){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/free_ab_hendrix_lighter.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $OFF100 = $_product->getAttributeText('s100off');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($OFF100 == $left){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/s100off.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $itemsLeft = $_product->getAttributeText('items_left_3');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($itemsLeft == $left){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/items_left_3.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $gold4sm = $_product->getAttributeText('free_cao_gold4sm');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($gold4sm == $left){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/free_cao_gold4sm.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $price_19_99 = $_product->getAttributeText('price_19_99');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($price_19_99 == $left){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/price_19_99.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $price_29_99 = $_product->getAttributeText('price_29_99');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($price_29_99 == $left){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/price_29_99.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+
+          <?php
+              $new_lower_price = $_product->getAttributeText('new_lower_price');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($new_lower_price == $left){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/new_lower_price.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+
+          <?php
+              $free_cao_worldsm = $_product->getAttributeText('free_cao_worldsm');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($free_cao_worldsm == $left){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/free_cao_worldsm.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+
+          <?php
+              $items_left_1 = $_product->getAttributeText('items_left_1');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($items_left_1 == $left){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/items_left_1.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+
+          <?php
+              $n1cigar = $_product->getAttributeText('n1cigar');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($n1cigar == $left){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/n1cigar.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+
+          <?php
+              $pr_25_off = $_product->getAttributeText('pr_25_off');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($pr_25_off == $left){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/pr_25_off.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+
+          <?php
+              $free_cao_com_sm = $_product->getAttributeText('free_cao_com_sm');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($free_cao_com_sm == $left){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/free_cao_com_sm.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+		  <?php
+              $free_golf_ball = $_product->getAttributeText('free_golf_ball');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($free_golf_ball == $left){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/free_golf_ball.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $buy3get1 = $_product->getAttributeText('buy3get1');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($buy3get1 == $left){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/buy3get1.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          
+           <?php
+              $menthol_flavor_icon = $_product->getAttributeText('menthol_flavor_icon');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($menthol_flavor_icon == $left){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/menthol_flavor_icon.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          
+          <?php
+              $full_flavor_icon = $_product->getAttributeText('full_flavor_icon');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($full_flavor_icon == $left){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/full_flavor_icon.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          
+           <?php
+              $buy6get1 = $_product->getAttributeText('buy6get1');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($buy6get1 == $left){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/buy6get1.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          
+          <?php
+              $free_gotham_lighter = $_product->getAttributeText('free_gotham_lighter');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($free_gotham_lighter == $left){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/free_gotham_lighter.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          
+           <?php
+              $pr_10_off = $_product->getAttributeText('pr_10_off');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($pr_10_off == $left){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/pr_10_off.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          
+          <?php
+              $free_butane = $_product->getAttributeText('free_butane');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($free_butane == $left){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/free_butane.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          
+          <?php
+              $super_deal_o = $_product->getAttributeText('super_deal_o');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($super_deal_o == $left){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/super_deal_o.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          
+          <?php
+              $buy4get1 = $_product->getAttributeText('buy4get1');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($buy4get1 == $left){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/buy4get1.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          
+          <?php
+              $soldout = $_product->getAttributeText('soldout');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($soldout == $left){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/soldout.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          
+          <?php
+              $discontinued = $_product->getAttributeText('discontinued');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($discontinued == $left){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/discontinued.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          
+           <?php
+              $free_ab_connecticut_r_5pk = $_product->getAttributeText('free_ab_connecticut_r_5pk');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($free_ab_connecticut_r_5pk == $left){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/free_ab_connecticut_r_5pk.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          
+           <?php
+              $free_ab_pr_ch_sm_w_lgh = $_product->getAttributeText('free_ab_pr_ch_sm_w_lgh');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($free_ab_pr_ch_sm_w_lgh == $left){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/free_ab_pr_ch_sm_w_lgh.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          
+           <?php
+              $free_rp_renais_t_5pk = $_product->getAttributeText('free_rp_renais_t_5pk');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($free_rp_renais_t_5pk == $left){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/free_rp_renais_t_5pk.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          
+          <?php
+              $buy5get1 = $_product->getAttributeText('buy5get1');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($buy5get1 == $left){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/buy5get1.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          
+           <?php
+              $free_nub_ashtray = $_product->getAttributeText('free_nub_ashtray');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($free_nub_ashtray == $left){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/free_nub_ashtray.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          
+          <?php
+              $free_ab_sungrown_r_5pk = $_product->getAttributeText('free_ab_sungrown_r_5pk');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($free_ab_sungrown_r_5pk == $left){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/free_ab_sungrown_r_5pk.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          
+          <?php
+              $free_avo_n2_4 = $_product->getAttributeText('free_avo_n2_4');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($free_avo_n2_4 == $left){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/free_avo_n2_4.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+</center>
+      </div>
+    </div>
+    <div class="colm2">
+                  <div class="productImgFrame">
+          <?php /*?><?php if(($_product->special_price !== null) or ($_product->_rule_price !== null)): ?>
+          <?php //echo '<span class="iconSale"></span>' ?>
+          <?php elseif (!$_product->getIsSalable()): ?>
+            <span class="iconSold"></span>
+          <?php else:
+            $current_date = date("Y-m-d",strtotime("now"));
+              $from_date = date("Y-m-d",strtotime($_product->getData('news_from_date')));
+              $to_date = date("Y-m-d",strtotime($_product->getData('news_to_date')));
+              //echo $current_date = new DateTime($date); // compare date
+              //$from_date = new DateTime($_product->getData('news_from_date')); // begin date
+              //$to_date = new DateTime($_product->getData('news_to_date')); // end date
+
+              $is_new = ($current_date >= $from_date && $current_date <= $to_date)?"1":"0";
+              //echo "New : ".$_product->getData('news_to_date');
+              if($is_new=='1') {
+          ?>
+            <?php //echo '<span class="iconNew"></span>' ?>
+          <?php
+              }
+          endif; ?><?php */?>
+          <div class="picContainer">
+          <?php // Product Image ?>
+          <div class="onsale-category-container-list">
+                      <?php //echo Mage::helper('onsale')->getCategoryLabelHtml($_product); ?>
+              <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(140,144); ?>" width="140" height="144" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" /></a>
+            </div>
+        </div></div>
+
+
+        </div>
+            <?php // Product description ?>
+            <div class="colm3">
+
+              <div class="innerCon">
+                <div class="productName">
+                    <?php $_productNameStripped = $this->stripTags($_product->getName(), null, true); ?>
+                    <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $_productNameStripped; ?>"><?php echo $_helper->productAttribute($_product, $_product->getName() , 'name'); ?></a>
+                </div>
+<!-- If OK Change to PHP (Ulises Changes)-->
+ <table>
+ <tr>
+ <td>
+                <div class="descList">
+          <?php echo $_helper->productAttribute($_product, nl2br($_product->getShortDescription()), 'short_description') ?>
+                </div>
+        <div class="saveMessage">
+        <style>
+        #saveMessage_msgTxt {
+          display:none;
+        }
+        </style>
+        <?php $_taxHelper  = $this->helper('tax'); ?>
+        <?php $_price = $_taxHelper->getPrice($_product, $_product->getPrice()) ?>
+        <?php $_finalPrice = $_taxHelper->getPrice($_product, $_product->getFinalPrice()); ?>
+        <?php $_msrpPrice = $_taxHelper->getPrice($_product, $_product->getMsrp()) ?>
+        <?php $percentage = 100 - (($_finalPrice * 100) / $_msrpPrice);
+            $p = explode(".",$percentage);
+            $pn = ".".$p[1];
+            if($pn >= 0.5) {
+              $percentage = ceil($percentage);
+            }
+            else {
+              $percentage = floor($percentage);
+            }
+          if($percentage>0 && $_msrpPrice>0) {
+        ?>
+
+                  <div class="msgTxt">You save <?php echo $percentage; //echo ($new_price);  ?>% at Gotham Cigars</div>
+          <?php
+            }
+            $stockItem = Mage::getModel('cataloginventory/stock_item')->loadByProduct($_product);
+            $qty = $stockItem->getQty();
+            if ($qty>0): ?>
+                            <div class="btnGreen"><?php echo $this->__('In Stock & Ready to Ship') ?></div>
+                        <?php else: ?>
+                            <div class="StockHint StockHint_OutOfStock">
+<b style="color:#0033FF">Item is currently on backorder</b><br><span style="font-size:.8em;color:black; font-weight:normal">Note: Items purchased on backorder usually arrive in-house 1-7 days for shipping.</span></div>
+                    <?php endif; ?>
+
+                           </div>
+ </td>
+ <td>
+<center>
+          <?php
+              $closeout = $_product->getAttributeText('closeout');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $closeout == $right){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/closeout.png\" border=0>";
+                            };
+          ?>
+          <?php
+              $new_item = $_product->getAttributeText('new_item');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $new_item == $right){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/new.png\" border=0>";
+                            };
+          ?>
+          <?php
+              $free_vertigo_lighter = $_product->getAttributeText('free_vertigo_lighter');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($free_vertigo_lighter == $right){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/free_vertigo_lighter.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $sale_price = $_product->getAttributeText('sale_price');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $sale_price == $right){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/sale_price.png\" border=0>";
+                             echo "<br />";
+                             };
+          ?>
+          <?php
+              $buy_1_get_1 = $_product->getAttributeText('buy_1_get_1');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $buy_1_get_1 == $right){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/Buy1Get1.png\" border=0>";
+                            };
+          ?>
+          <?php
+              $buy_10_get_10 = $_product->getAttributeText('buy_10_get_10');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $buy_10_get_10 == $right){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/buy10get10.png\" border=0>";
+                            };
+          ?>
+          <?php
+              $buy_25_get_25 = $_product->getAttributeText('buy_25_get_25');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $buy_25_get_25 == $right){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/buy25get25.png\" border=0>";
+                            };
+          ?>
+          <?php
+              $buy_40_get_10 = $_product->getAttributeText('buy_40_get_10');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $buy_40_get_10 == $right){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/buy40get10.png\" border=0>";
+                            };
+          ?>
+          <?php
+              $buy_40_get_20 = $_product->getAttributeText('buy_40_get_20');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $buy_40_get_20 == $right){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/buy40get20.png\" border=0>";
+                            };
+          ?>
+          <?php
+              $buy_50_get_10 = $_product->getAttributeText('buy_50_get_10');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $buy_50_get_10 == $right){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/buy50get10.png\" border=0>";
+                            };
+          ?>
+          <?php
+              $buy_60_get_30 = $_product->getAttributeText('buy_60_get_30');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $buy_60_get_30 == $right){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/buy60get30.png\" border=0>";
+                            };
+          ?>
+          <?php
+              $rated_90 = $_product->getAttributeText('rated_90');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $rated_90 == $right){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/rated_90.png\" border=0>";
+                            };
+          ?>
+          <?php
+              $rated_91 = $_product->getAttributeText('rated_91');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $rated_91 == $right){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/rated_91.png\" border=0>";
+                            };
+          ?>
+          <?php
+              $rated_92 = $_product->getAttributeText('rated_92');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $rated_92 == $right){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/rated_92.png\" border=0>";
+                            };
+          ?>
+          <?php
+              $rated_93 = $_product->getAttributeText('rated_93');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $rated_93 == $right){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/rated_93.png\" border=0>";
+                            };
+          ?>
+          <?php
+              $rated_94 = $_product->getAttributeText('rated_94');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $rated_94 == $right){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/rated_94.png\" border=0>";
+                            };
+          ?>
+          <?php
+              $rated_95 = $_product->getAttributeText('rated_95');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $rated_95 == $right){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/rated_95.png\" border=0>";
+                            };
+          ?>
+          <?php
+              $pack_5 = $_product->getAttributeText('pack_5');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $pack_5 == $right){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/5pk.png\" border=0>";
+                            };
+          ?>
+          <?php
+              $off_10 = $_product->getAttributeText('off_10');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $off_10 == $right){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/10OFF.png\" border=0>";
+                            };
+          ?>
+          <?php
+              $off_2 = $_product->getAttributeText('off_2');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $off_2 == $right){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/2OFF.png\" border=0>";
+                            };
+          ?>
+          <?php
+              $off_5 = $_product->getAttributeText('off_5');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $off_5 == $right){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/5OFF.png\" border=0>";
+                            };
+          ?>
+          <?php
+              $off_399 = $_product->getAttributeText('off_399');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $off_399 == $right){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/399OFF.png\" border=0>";
+                            };
+          ?>
+          <?php
+              $off_20 = $_product->getAttributeText('off_20');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $off_20 == $right){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/20OFF.png\" border=0>";
+                            };
+          ?>
+          <?php
+              $off_3 = $_product->getAttributeText('off_3');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $off_3 == $right){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/3OFF.png\" border=0>";
+                            };
+          ?>
+          <?php
+              $free_hoyo = $_product->getAttributeText('free_hoyo');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $free_hoyo == $right){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/FreeHoyodeMonterreySampler.jpg\" border=0>";
+                            };
+          ?>
+          <?php
+              $pack_alec = $_product->getAttributeText('pack_alec');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $pack_alec == $right){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/FreeAlec.jpg\" border=0>";
+                            };
+          ?>
+          <?php
+              $free_cao = $_product->getAttributeText('free_cao');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $free_cao == $right){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/FreeCAOgift.jpg\" border=0>";
+                            };
+          ?>
+          <?php
+              $three_off_5 = $_product->getAttributeText('three_off_5');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $three_off_5 == $right){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/3off5.jpg\" border=0>";
+                            };
+          ?>
+          <?php
+              $two_off_10 = $_product->getAttributeText('two_off_10');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $two_off_10 == $right){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/2off10.jpg\" border=0>";
+                            };
+          ?>
+          <?php
+              $two_off_5 = $_product->getAttributeText('two_off_5');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $two_off_5 == $right){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/2off5.jpg\" border=0>";
+                            };
+          ?>
+          <?php
+              $two_off_6 = $_product->getAttributeText('two_off_6');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $two_off_6 == $right){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/2off6.jpg\" border=0>";
+                            };
+          ?>
+          <?php
+              $two_off_5_minus = $_product->getAttributeText('two_off_5_minus');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $two_off_5_minus == $right){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/2off5-1.jpg\" border=0>";
+                            };
+          ?>
+          <?php
+              $three_off_5_minus = $_product->getAttributeText('three_off_5_minus');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $three_off_5_minus == $right){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/3off5-1.jpg\" border=0>";
+                            };
+          ?>
+          <?php
+              $two_off_10_minus = $_product->getAttributeText('two_off_10_minus');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $two_off_10_minus == $right){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/2off10-1.jpg\" border=0>";
+                            };
+          ?>
+
+
+
+          <?php
+              $free_ab = $_product->getAttributeText('free_ab');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $free_ab == $right){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/FreeABMaxx4Pack.jpg\" border=0>";
+                            }elseif ($free_ab == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/FreeABMaxx4Pack.jpg\" border=0>";
+                            };
+          ?>
+          <?php
+              $free_shipping_25 = $_product->getAttributeText('free_shipping_25');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $free_shipping_25 == $right){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/FreeShipping.jpg\" border=0>";
+                            }elseif ($free_shipping_25 == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/FreeShipping.jpg\" border=0>";
+                            };
+          ?>
+          <?php
+              $off_6 = $_product->getAttributeText('off_6');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $off_6 == $right){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/6OFF.png\" border=0>";
+                            }elseif ($off_6 == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/6OFF.png\" border=0>";
+                            };
+          ?>
+          <?php
+              $super_deal = $_product->getAttributeText('super_deal');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $super_deal == $right){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/SuperDeal8oFF.jpg\" border=0>";
+                            }elseif ($super_deal == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/SuperDeal8oFF.jpg\" border=0>";
+                            };
+          ?>
+          <?php
+              $free_acid = $_product->getAttributeText('free_acid');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $free_acid == $right){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/FreeAcidKKCig5P.jpg\" border=0>";
+                            }elseif ($free_acid == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/FreeAcidKKCig5P.jpg\" border=0>";
+                            };
+          ?>
+          <?php
+              $free_oliva = $_product->getAttributeText('free_oliva');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $free_oliva == $right){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/FreeOlivAshTRay.jpg\" border=0>";
+                            }elseif ($free_oliva == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/FreeOlivAshTRay.jpg\" border=0>";
+                            };
+          ?>
+          <?php
+              $free_ab_tempus = $_product->getAttributeText('free_ab_tempus');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $free_ab_tempus == $right){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/FreeABTEmpus5P.jpg\" border=0>";
+                            }elseif ($free_ab_tempus == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/FreeABTEmpus5P.jpg\" border=0>";
+                            };
+          ?>
+          <?php
+              $closeout_20 = $_product->getAttributeText('closeout_20');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $closeout_20 == $right){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/20PrOFF.jpg\" border=0>";
+                            }elseif ($closeout_20 == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/20PrOFF.jpg\" border=0>";
+                            };
+          ?>
+          <?php
+              $free_don_lino = $_product->getAttributeText('free_don_lino');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $free_don_lino == $right){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/FreeDonLinoAfrica.jpg\" border=0>";
+                            }elseif ($free_don_lino == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/FreeDonLinoAfrica.jpg\" border=0>";
+                            };
+          ?>
+          <?php
+              $free_asti_humidor = $_product->getAttributeText('free_asti_humidor');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $free_asti_humidor == $right){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/FreeAstiHumidor.jpg\" border=0>";
+                            }elseif ($free_asti_humidor == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/FreeAstiHumidor.jpg\" border=0>";
+                            };
+          ?>
+          <?php
+              $free_cao_last = $_product->getAttributeText('free_cao_last');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $free_cao_last == $right){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/FreeCAOstick.jpg\" border=0>";
+                            }elseif ($free_cao_last == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/FreeCAOstick.jpg\" border=0>";
+                            };
+          ?>
+          <?php
+              $free_shipping = $_product->getAttributeText('free_shipping');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $free_shipping == $right){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/FreeShipping.jpg\" border=0>";
+                            }elseif ($free_shipping == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/FreeShipping.jpg\" border=0>";
+                            };
+          ?>
+          <?php
+              $fathers_day = $_product->getAttributeText('fathers_day');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $fathers_day == $right){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/FathersDaygift.jpg\" border=0>";
+                            }elseif ($fathers_day == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/FathersDaygift.jpg\" border=0>";
+                            };
+          ?>
+          <?php
+              $free_oliva_sampler = $_product->getAttributeText('free_oliva_sampler');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($free_oliva_sampler == $right){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/free_oliva_sampler.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $off_25 = $_product->getAttributeText('off_25');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $off_25 == $right){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/25OFF.png\" border=0>";
+                            }elseif ($off_25 == $left){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/25OFF.png\" border=0>";
+                            };
+          ?>
+          <?php
+              $custom_1 = $_product->getAttributeText('custom_1');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ($custom_1 == $right){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/custom_1.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $custom_2 = $_product->getAttributeText('custom_2');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ($custom_2 == $right){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/custom_2.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $custom_3 = $_product->getAttributeText('custom_3');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ($custom_3 == $right){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/custom_3.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $custom_4 = $_product->getAttributeText('custom_4');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ($custom_4 == $right){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/custom_4.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $free_capri_humidor = $_product->getAttributeText('free_capri_humidor');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($free_capri_humidor == $right){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/free_capri_humidor.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $free_ab_hendrix_lighter = $_product->getAttributeText('free_ab_hendrix_lighter');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($free_ab_hendrix_lighter == $right){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/free_ab_hendrix_lighter.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $OFF100 = $_product->getAttributeText('s100off');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($OFF100 == $right){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/s100off.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $proff = $_product->getAttributeText('pr_20_off');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($proff == $right){
+                             echo "<img src=\"http://www.gothamcigars.com/media/Icons/pr_20_off.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $itemsLeft = $_product->getAttributeText('items_left_3');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ( $itemsLeft == $right){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/items_left_3.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $gold4sm = $_product->getAttributeText('free_cao_gold4sm');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($gold4sm == $right){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/free_cao_gold4sm.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $price_19_99 = $_product->getAttributeText('price_19_99');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($price_19_99 == $right){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/price_19_99.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $price_29_99 = $_product->getAttributeText('price_29_99');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($price_29_99 == $right){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/price_29_99.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+
+          <?php
+              $new_lower_price = $_product->getAttributeText('new_lower_price');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($new_lower_price == $right){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/new_lower_price.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+
+          <?php
+              $free_cao_worldsm = $_product->getAttributeText('free_cao_worldsm');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($free_cao_worldsm == $right){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/free_cao_worldsm.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+
+          <?php
+              $items_left_1 = $_product->getAttributeText('items_left_1');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($items_left_1 == $right){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/items_left_1.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+
+          <?php
+              $n1cigar = $_product->getAttributeText('n1cigar');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($n1cigar == $right){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/n1cigar.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+
+          <?php
+              $pr_25_off = $_product->getAttributeText('pr_25_off');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($pr_25_off == $right){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/pr_25_off.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+
+          <?php
+              $free_cao_com_sm = $_product->getAttributeText('free_cao_com_sm');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($free_cao_com_sm == $right){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/free_cao_com_sm.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+           <?php
+              $free_golf_ball = $_product->getAttributeText('free_golf_ball');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($free_golf_ball == $right){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/free_golf_ball.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $buy3get1 = $_product->getAttributeText('buy3get1');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($buy3get1 == $right){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/buy3get1.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          
+          <?php
+              $menthol_flavor_icon = $_product->getAttributeText('menthol_flavor_icon');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($menthol_flavor_icon == $right){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/menthol_flavor_icon.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          
+           <?php
+              $full_flavor_icon = $_product->getAttributeText('full_flavor_icon');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($full_flavor_icon == $right){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/full_flavor_icon.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $buy6get1 = $_product->getAttributeText('buy6get1');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($buy6get1 == $right){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/buy6get1.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          
+          <?php
+              $free_gotham_lighter = $_product->getAttributeText('free_gotham_lighter');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($free_gotham_lighter == $right){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/free_gotham_lighter.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          
+           <?php
+              $pr_10_off = $_product->getAttributeText('pr_10_off');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($pr_10_off == $right){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/pr_10_off.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          
+          <?php
+              $free_butane = $_product->getAttributeText('free_butane');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($free_butane == $right){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/free_butane.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          
+          <?php
+              $super_deal_o = $_product->getAttributeText('super_deal_o');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($super_deal_o == $right){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/super_deal_o.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          
+           <?php
+              $buy4get1 = $_product->getAttributeText('buy4get1');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($buy4get1 == $right){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/buy4get1.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          
+          <?php
+              $soldout = $_product->getAttributeText('soldout');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($soldout == $right){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/soldout.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          
+          <?php
+              $discontinued = $_product->getAttributeText('discontinued');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($discontinued == $right){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/discontinued.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          
+           <?php
+              $free_ab_connecticut_r_5pk = $_product->getAttributeText('free_ab_connecticut_r_5pk');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($free_ab_connecticut_r_5pk == $right){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/free_ab_connecticut_r_5pk.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          
+           <?php
+              $free_ab_pr_ch_sm_w_lgh = $_product->getAttributeText('free_ab_pr_ch_sm_w_lgh');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($free_ab_pr_ch_sm_w_lgh == $right){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/free_ab_pr_ch_sm_w_lgh.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          
+           <?php
+              $free_rp_renais_t_5pk = $_product->getAttributeText('free_rp_renais_t_5pk');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($free_rp_renais_t_5pk == $right){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/free_rp_renais_t_5pk.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          
+          <?php
+              $buy5get1 = $_product->getAttributeText('buy5get1');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($buy5get1 == $right){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/buy5get1.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          
+          <?php
+              $free_nub_ashtray = $_product->getAttributeText('free_nub_ashtray');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($free_nub_ashtray == $right){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/free_nub_ashtray.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          
+          <?php
+              $free_ab_sungrown_r_5pk = $_product->getAttributeText('free_ab_sungrown_r_5pk');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($free_ab_sungrown_r_5pk == $right){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/free_ab_sungrown_r_5pk.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          
+           <?php
+              $free_avo_n2_4 = $_product->getAttributeText('free_avo_n2_4');
+              $right = "Yes- Right";
+              $left = "Yes- Left";
+                       if ($free_avo_n2_4 == $right){
+                             echo "<img src=\"http://gothamcigars.com/media/Icons/free_avo_n2_4.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          
+</center>
+ </td>
+ </tr>
+ </table>
+
+                           </div>
+
+      </div>
+      <div class="colm4">
+      <form action="<?php echo Mage::getBaseUrl(); ?>checkout/cart/add/product/<?php echo $_product->getId(); ?><?php //echo $this->getAddToCartUrl($_product) ?>" method="post" id="product_addtocart_form_<?php echo $_product->getId() ?>" <?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+        <div class="proPrice">
+                    <?php echo $this->getPriceHtml($_product, true) ?>
+        </div>
+        <?php if($_finalPrice>=150 and $_product->getId() != 836) { ?>
+        <img src="<?php echo $this->getSkinUrl('images/freegroundshipping.png'); ?>" alt="" border="0" />
+        <?php } ?>
+        Quantity:<br><input class='listtextbox' id='qty' class='input-text qty' type='text' value='1' maxlength='4' size="3" name='qty'/>
+        <div class="btnAddCart">
+          <?php //if($_product->isSaleable()): ?>
+                        <!--<button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"><span><span><?php echo $this->__('Add to Cart') ?></span></span></button>-->
+            <a href="javascript:void(0);" onclick="productAddToCartForm_<?php echo $_product->getId() ?>.submit(this)"><img src="<?php echo $this->getSkinUrl('images/btn-add-to-cart.png') ?>"  alt="<?php echo $this->__('Add to Cart') ?>" /></a>
+
+                    <?php //endif; ?>
+        </div>
+        <div class="descList">
+        <ul class="add-to-links">
+                            <?php if ($this->helper('wishlist')->isAllow()) : ?>
+                                <li><a href="<?php echo $this->helper('wishlist')->getAddUrl($_product) ?>" class="link-wishlist"><?php echo $this->__('Add to Wishlist') ?></a></li>
+                            <?php endif; ?>
+                </ul>
+        </div>
+        <script type="text/javascript">
+//<![CDATA[
+    var productAddToCartForm_<?php echo $_product->getId() ?> = new VarienForm('product_addtocart_form_<?php echo $_product->getId() ?>');
+    productAddToCartForm_<?php echo $_product->getId() ?>.submit = function(button, url) {
+        if (this.validator.validate()) {
+            var form = this.form;
+            var oldUrl = form.action;
+
+            if (url) {
+               form.action = url;
+            }
+            var e = null;
+            try {
+                this.form.submit();
+            } catch (e) {
+            }
+            this.form.action = oldUrl;
+            if (e) {
+                throw e;
+            }
+
+            if (button && button != 'undefined') {
+                button.disabled = true;
+            }
+        }
+    }.bind(productAddToCartForm);
+
+    productAddToCartForm_<?php echo $_product->getId() ?>.submitLight = function(button, url){
+        if(this.validator) {
+            var nv = Validation.methods;
+            delete Validation.methods['required-entry'];
+            delete Validation.methods['validate-one-required'];
+            delete Validation.methods['validate-one-required-by-name'];
+            if (this.validator.validate()) {
+                if (url) {
+                    this.form.action = url;
+                }
+                this.form.submit();
+            }
+            Object.extend(Validation.methods, nv);
+        }
+    }.bind(productAddToCartForm_<?php echo $_product->getId() ?>);
+//]]>
+</script>
+      </form>
+      </div>
+            <div class="clear"></div>
+            </div>
+                    <?php /* ?><div class="desc std">
+                        <?php echo $_helper->productAttribute($_product, $_product->getShortDescription(), 'short_description') ?>
+                        <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $_productNameStripped ?>" class="link-learn"><?php echo $this->__('Learn More') ?></a>
+                    </div><?php */ ?>
+
+
+
+    <?php endforeach; ?>
+    <script type="text/javascript">decorateList('products-list', 'none-recursive')</script>
+
+<?php else: ?>
+
+<?php // Grid Mode ?>
+
+<?php $_collectionSize = $_productCollection->count() ?>
+<?php $_columnCount = $this->getColumnCount(); ?>
+<?php $i=0; foreach ($_productCollection as $_product): ?>
+    <?php if ($i++%$_columnCount==0): ?>
+    <ul class="products-grid">
+    <?php endif ?>
+        <li class="item<?php if(($i-1)%$_columnCount==0): ?> first<?php elseif($i%$_columnCount==0): ?> last<?php endif; ?>">
+           <div class="onsale-category-container-grid">
+            <?php echo Mage::helper('onsale')->getCategoryLabelHtml($_product); ?>
+      <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(100); ?>" width="100" height="100" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" /></a>
+       </div>
+            <h2 class="product-name"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></a></h2>
+            <?php if($_product->getRatingSummary()): ?>
+            <?php //echo $this->getReviewsSummaryHtml($_product, 'short') ?>
+            <?php endif; ?>
+            <?php //echo $this->getPriceHtml($_product, true) ?>
+
+        </li>
+    <?php if ($i%$_columnCount==0 || $i==$_collectionSize): ?>
+    </ul>
+    <?php endif ?>
+    <?php endforeach ?>
+    <script type="text/javascript">decorateGeneric($$('ul.products-grid'), ['odd','even','first','last'])</script>
+<?php endif; ?>
+<div class="pagingWrap pagingBottom">
+    <?php echo $this->getToolbarHtml() ?>
+</div>
+</div>
+</div>
+<?php endif; ?>

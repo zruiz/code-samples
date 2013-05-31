@@ -1,0 +1,21 @@
+<config>
+
+ <modules>
+   <Magento_Customization>
+     <version>0.0.9</version>
+   </Magento_Customization>
+ </modules>
+ 
+  <frontend>
+	  <routers>
+	    <customer>
+	      <args>
+	        <modules>
+		      <magento_customization after="Mage_Customer">Magento_Customization_Customer</magento_customization>
+		    </modules>
+	      </args>
+	    </customer>
+	  </routers>
+	</frontend>
+	
+</config>

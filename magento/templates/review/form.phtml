@@ -1,0 +1,154 @@
+<?php
+/**
+ * aheadWorks Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://ecommerce.aheadworks.com/LICENSE-M1.txt
+ *
+ * @category   AW
+ * @package    AW_AdvancedReviews
+ * @copyright  Copyright (c) 2009-2011 aheadWorks Co. (http://www.aheadworks.com)
+ * @license    http://ecommerce.aheadworks.com/LICENSE-M1.txt
+ */
+?>
+<form action="<?php echo $this->getAction() ?>" method="post" id="review-form" class="advancedreviews-reviews-form">
+    <div class="box-title" id="review-form">
+        <h2><?php echo $this->__('Write Your Own Review') ?></h2>
+    </div>
+    <?php echo $this->getChildHtml('form_fields_before')?>
+    <div class="box-content">
+        <h3 class="product-name"><?php echo $this->__("You're reviewing:"); ?> <span><?php echo $this->htmlEscape($this->getProductInfo()->getName()) ?></span></h3>
+        <?php if( $this->getRatings() && $this->getRatings()->getSize()): ?>
+            <span id="input-message-box"></span>
+            <ul class="form-list">
+                <li>
+                    <label class="required"><em>*</em><?php echo $this->__('How do you rate this product?') ?></label>
+                    <div class="input-box">
+                        <table class="data-table review-summary-table" id="product-review-table">
+                            <col />
+                            <col width="1" />
+                            <col width="1" />
+                            <col width="1" />
+                            <col width="1" />
+                            <col width="1" />
+                            <thead>
+                                <tr>
+                                    <th>&nbsp;</th>
+                                    <th><div class="rating-box"><span class="rating nobr" style="width:20%" title="<?php echo $this->__('1 star') ?>"></span></div></th>
+                                    <th><div class="rating-box"><span class="rating nobr" style="width:40%" title="<?php echo $this->__('2 stars') ?>"></span></div></th>
+                                    <th><div class="rating-box"><span class="rating nobr" style="width:60%" title="<?php echo $this->__('3 stars') ?>"></span></div></th>
+                                    <th><div class="rating-box"><span class="rating nobr" style="width:80%" title="<?php echo $this->__('4 stars') ?>"></span></div></th>
+                                    <th><div class="rating-box"><span class="rating nobr" style="width:100%" title="<?php echo $this->__('5 stars') ?>"></span></div></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php foreach ($this->getRatings() as $_rating): ?>
+                                <tr>
+                                    <td class="label"><?php echo $this->escapeHtml($_rating->getRatingCode()) ?></td>
+                                <?php foreach ($_rating->getOptions() as $_option): ?>
+                                    <td class="value"><input type="radio" name="ratings[<?php echo $_rating->getId() ?>]" id="<?php echo $this->escapeHtml($_rating->getRatingCode()) ?>_<?php echo $_option->getValue() ?>" value="<?php echo $_option->getId() ?>" class="radio" /></td>
+                                <?php endforeach; ?>
+                                </tr>
+                            <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                        <input type="hidden" name="validate_rating" class="validate-rating" value="" />
+                        <script type="text/javascript">decorateTable('product-review-table')</script>
+                    </div>
+                </li>
+            </ul>
+        <?php endif ?>
+        <ul>
+            <li>
+               <?php echo $this->getChildHtml('advancedreviews_proscons_checker') ?>
+            </li>
+        </ul>
+        <ul class="form-list">
+            <?php echo $this->getChildHtml('advancedreviews_recommend_field') ?>
+            <li>
+                <label for="email_field" class="required"><em>*</em><?php echo $this->__('Email') ?></label>
+                <div class="input-box">
+                    <input type="text" name="email" id="email_field" class="with420 input-text required-entry validate-email"/>
+                </div>
+            </li>
+            <li>
+                <label for="nickname_field" class="required"><em>*</em><?php echo $this->__('Nickname') ?></label>
+                <div class="input-box"><input type="text" name="nickname" id="nickname_field" class="with420 input-text required-entry" value="<?php echo $this->htmlEscape($data->getNickname()) ?>" /></div>
+            </li>
+            <li>
+                <label for="summary_field" class="required"><em>*</em><?php echo $this->__('Summary of Your Review') ?></label>
+                <div class="input-box"><input type="text" name="title" id="summary_field" class="with420 input-text required-entry" value="<?php echo $this->htmlEscape($data->getTitle()) ?>" /></div>
+            </li>
+            <li>
+                <label for="review_field" class="required"><em>*</em><?php echo $this->__('Review') ?></label>
+                <div class="input-box"><textarea name="detail" id="review_field" cols="5" rows="3" class="with420 required-entry"><?php echo $this->htmlEscape($data->getDetail()) ?></textarea></div>
+            </li>
+            <li>
+        <div class="buttons-set form-buttons btn-only">
+            <button type="submit" class="button"><span><span><?php echo $this->__('Submit Review') ?></span></span></button>
+        </div>
+        <p class="required"><?php echo $this->__('* Required Fields') ?></p>
+            </li>
+        </ul>
+    </div>
+        <script type="text/javascript">
+            function appendAntiSpamField(){
+                var forms = document.getElementsByTagName("form");
+                for(var i = 0,l = forms.length;i < l;i++){
+                    var inp = document.createElement('input');
+                    inp.setAttribute("type","hidden");
+                    inp.setAttribute("name","_antispam");
+                    var d = new Date();
+                    inp.value = "antispam_"+d.getMilliseconds();
+                    forms[i].appendChild(inp);
+                }
+            }
+            document.observe("dom:loaded", appendAntiSpamField);
+        </script>
+</form>
+<style type="text/css">
+    .with420 {
+        width: 414px !important;
+    }
+    .with680 {
+        width: 660px !important;
+    }
+</style>
+<script type="text/javascript">
+//<![CDATA[
+    var dataForm = new VarienForm('review-form');
+    Validation.addAllThese(
+    [
+           ['validate-rating', '<?php echo $this->__('Please select one of each of the ratings above') ?>', function(v) {
+                var trs = $('product-review-table').select('tr');
+                var inputs;
+                var error = 1;
+
+                for( var j=0; j < trs.length; j++ ) {
+                    var tr = trs[j];
+                    if( j > 0 ) {
+                        inputs = tr.select('input');
+
+                        for( i in inputs ) {
+                            if( inputs[i].checked == true ) {
+                                error = 0;
+                            }
+                        }
+
+                        if( error == 1 ) {
+                            return false;
+                        } else {
+                            error = 1;
+                        }
+                    }
+                }
+                return true;
+            }]
+    ]
+    );
+//]]>
+</script>

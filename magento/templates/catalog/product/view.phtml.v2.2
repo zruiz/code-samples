@@ -1,0 +1,833 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ * /cigarsinternationals.com/html/app/design/frontend/enterprise/gotham/template/catalog/product
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     enterprise_default
+ * @copyright   Copyright (c) 2011 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+
+/**
+ * Product view template
+ *
+ * @see Mage_Catalog_Block_Product_View
+ * @see Mage_Review_Block_Product_View
+ */
+?>
+<?php $_helper = $this->helper('catalog/output'); ?>
+<?php $_product = $this->getProduct(); ?>
+<script type="text/javascript">
+    var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
+</script>
+<div id="messages_product_view"><?php echo $this->getMessagesBlock()->toHtml() ?></div>
+<div class="product-view">
+    <form action="<?php echo $this->getSubmitUrl($_product) ?>" method="post" id="product_addtocart_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+        <div class="no-display">
+            <input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
+            <input type="hidden" name="related_product" id="related-products-field" value="" />
+        </div>
+        <div class="product-essential">
+
+                <div class="product-shop">
+                    <div class="product-main-info">
+                        <div class="product-name">
+                            <h1><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
+                        </div>
+                        <p class="product-ids"><?php echo $this->__('SKU# %s', $this->htmlEscape($_product->getSku())); ?></p>
+            <?php /*if ($this->canEmailToFriend()): ?>
+                <p class="emailto-link"><a href="<?php echo $this->helper('catalog/product')->getEmailToFriendUrl($_product) ?>"><?php echo $this->__('Email to a Friend') ?></a></p>
+            <?php endif;*/ ?>
+            <div class="product-collateral">
+            <?php if ($detailedInfoGroup = $this->getChildGroup('detailed_info', 'getChildHtml')):?>
+                <?php foreach ($detailedInfoGroup as $alias => $html):?>
+                    <?php /* ?><div class="prod_descr"><?php echo $this->escapeHtml($this->getChildData($alias, 'title')) ?></div><?php */ ?>
+                       <div class="tab-content"><?php echo $html ?></div>
+                <?php endforeach;?>
+            <?php endif; ?>
+            <?php /* ?><div class="tab-content" style="border-top:1px solid #CCC; padding-top:0px;"><?php echo $_helper->productAttribute($_product, nl2br($_product->getShortDescription()), 'short_description') ?></div><?php */ ?>
+        </div>
+
+                        <?php echo $this->getChildHtml('alert_urls') ?>
+
+                    </div>
+
+                    <?php echo $this->getChildHtml('tierprices') ?>
+          <?php echo $this->getChildHtml('product_type_data') ?>
+                    <?php echo $this->getChildHtml('extrahint') ?>
+
+                    <?php if (!$this->hasOptions()):?>
+                        <div class="add-to-box">
+                            <?php if($_product->isSaleable()): ?>
+                                <?php echo $this->getChildHtml('addtocart') ?>
+                            <?php endif; ?>
+                            <?php echo $this->getChildHtml('addto') ?>
+                        </div>
+                    <?php else:?>
+                        <?php if ($_product->isSaleable() && $this->hasOptions() && $this->getChildChildHtml('container1') ):?>
+                            <div class="options-container-small">
+                                <?php echo $this->getChildChildHtml('container1', '', true, true) ?>
+                            </div>
+                        <?php else: ?>
+                            <?php echo $this->getChildHtml('addto') ?>
+                        <?php endif;?>
+                    <?php endif; ?>
+
+                    <?php if ($_product->getShortDescription()):?>
+                        <div class="short-description std">
+                            <h2><?php echo $this->__('Quick Overview') ?></h2>
+                            <?php echo $_helper->productAttribute($_product, nl2br($_product->getShortDescription()), 'short_description') ?>
+                        </div>
+                    <?php endif;?>
+
+                    <?php echo $this->getChildHtml('other');?>
+          <!--TipYou Start-->
+                  <div style="text-align:center; margin-bottom:10px;">
+                  <a href="http://www.tipyou.com/stores/gothamcigars?h=6f3d3136343426723d31" class="tipyou" tipyou_layout="dynamic-button" tipyou_color="green">Tip It</a>
+                  <script type="text/javascript">
+                    (function() {
+                    var tu = document.createElement('script'); tu.type = 'text/javascript'; tu.async = true;
+                    tu.src = ('https:' == document.location.protocol ? '//ssl.tipyou.com' : '//assets.tipyou.com') + '/v2/tipit.js';
+                    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(tu, s);
+                    })();
+                  </script>
+                  </div>
+
+                  <!--TipYou End-->
+          <div><br><hr><script language="JavaScript" type="Text/Javascript">
+                                        function AddtoBookMark()
+                                        {
+                                        var title = "<?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?>";
+                                        var url = this.location;
+                                        //var url = "http://www.gothamcigars.com";
+
+                                        if (window.sidebar) { // Mozilla Firefox Bookmark
+                                        window.sidebar.addPanel(title, url,"");
+                                        } else if( window.external ) { // IE Favorite
+                                        window.external.AddFavorite( url, title); }
+                                        else if(window.opera )
+                                        { // Opera Hotlist
+                                        return true; }
+                                        }
+                                      </script>
+                    <a style="font-family:Verdana; font-size:12px; padding:10px 20px 0 10px; color: rgb(0, 114, 188); font-weight:bold" href="javascript:AddtoBookMark();">Bookmark This Page</a>
+                    <a class="a2a_dd" href="http://www.addtoany.com/share_save#url=<?php echo $_product->getProductUrl() ?>&amp;title=<?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?>&amp;description=Buy%20601%20BLUE%20MADURO%20ROBUSTO%20online%20from%20GothamCigars.com%20at%20discount%20prices"><img src="http://static.addtoany.com/buttons/share_save_171_16.png" width="171" height="16" border="0" alt="Share/Bookmark" style="margin:0 0 -4px 15px"></a><script type="text/javascript" src="http://static.addtoany.com/menu/page.js"></script><div class="social">
+          <table border="0" cellspacing="0" cellpadding="2">
+            <tbody><tr>
+              <td>
+                <div style="padding-top: 15px;width:75px">
+                  <iframe allowtransparency="true" frameborder="0" scrolling="no" src="//platform.twitter.com/widgets/tweet_button.html" style="width:60px; height:20px;"></iframe><span style="color:white">
+                                        c
+                                      </span></div>
+              </td>
+              <td>
+                <div style="padding-top: 12px; padding-left: 10px;">
+                  <div id="___plusone_1" style="height: 20px; width: 90px; display: inline-block; text-indent: 0px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; background-image: initial; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: transparent; border-top-style: none; border-right-style: none; border-bottom-style: none; border-left-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; background-position: initial initial; background-repeat: initial initial; "><iframe allowtransparency="true" frameborder="0" hspace="0" id="I2_1332138648192" marginheight="0" marginwidth="0" name="I2_1332138648192" scrolling="no" src="https://plusone.google.com/_/+1/fastbutton?url=<?php echo $_product->getProductUrl() ?>&amp;size=medium&amp;count=true&amp;hl=en-US&amp;jsh=m%3B%2F_%2Fapps-static%2F_%2Fjs%2Fgapi%2F__features__%2Frt%3Dj%2Fver%3DovUnDyIB9Z4.en_GB.%2Fsv%3D1%2Fam%3D!brN6X75-Zu-IDRYPeA%2Fd%3D1#id=I2_1332138648192&amp;parent=http%3A%2F%2Fwww.gothamcigars.com&amp;rpctoken=270758432&amp;_methods=onPlusOne%2C_ready%2C_close%2C_open%2C_resizeMe%2C_renderstart" style="width: 90px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; border-top-style: none; border-right-style: none; border-bottom-style: none; border-left-style: none; height: 20px; position: static; left: 0px; top: 0px; visibility: visible; " tabindex="0" vspace="0" width="100%" title="+1"></iframe></div></div>
+              </td>
+              <td>
+                <iframe src="http://www.facebook.com/plugins/like.php?href=<?php echo $_product->getProductUrl() ?>&amp;layout=standard&amp;show_faces=true&amp;width=270&amp;action=like&amp;font=tahoma&amp;colorscheme=light&amp;height=80" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:270px; height:25px; margin:10px 0 0 0" allowtransparency="true"></iframe>
+              </td>
+            </tr>
+          </tbody></table>
+        </div>
+      </div>
+
+                </div>
+
+                <div class="product-img-box">
+                    <?php echo $this->getChildHtml('media') ?>
+          <?php echo $this->getReviewsSummaryHtml($_product, false, true)?>
+          <br />
+<center>
+          <?php
+              $closeout = $_product->getAttributeText('closeout');
+              $yes = "Yes- Right";
+              $left = "Yes- Left ";
+                       if ( $closeout == $yes){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/closeout.png\" border=0>";
+                             echo "<br />";
+                            }elseif ($closeout == $left){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/closeout.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $new_item = $_product->getAttributeText('new_item');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $new_item == $yes){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/new.png\" border=0>";
+                             echo "<br />";
+                            }elseif ($new_item == $left){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/new.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $buy_1_get_1 = $_product->getAttributeText('buy_1_get_1');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $buy_1_get_1 == $right){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/Buy1Get1.png\" border=0>";
+                             echo "<br />";
+                            }elseif ($buy_1_get_1 == $left){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/Buy1Get1.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $buy_10_get_10 = $_product->getAttributeText('buy_10_get_10');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $buy_10_get_10 == $right){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/buy10get10.png\" border=0>";
+                             echo "<br />";
+                            }elseif ($buy_10_get_10 == $left){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/buy10get10.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $buy_25_get_25 = $_product->getAttributeText('buy_25_get_25');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $buy_25_get_25 == $right){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/buy25get25.png\" border=0>";
+                             echo "<br />";
+                            }elseif ($buy_25_get_25 == $left){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/buy25get25.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $buy_40_get_10 = $_product->getAttributeText('buy_40_get_10');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $buy_40_get_10 == $right){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/buy40get10.png\" border=0>";
+                             echo "<br />";
+                            }elseif ($buy_40_get_10 == $left){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/buy40get10.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $buy_40_get_20 = $_product->getAttributeText('buy_40_get_20');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $buy_40_get_20 == $right){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/buy40get20.png\" border=0>";
+                             echo "<br />";
+                            }elseif ($buy_40_get_20 == $left){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/buy40get20.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $buy_50_get_10 = $_product->getAttributeText('buy_50_get_10');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $buy_50_get_10 == $right){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/buy50get10.png\" border=0>";
+                             echo "<br />";
+                            }elseif ($buy_50_get_10 == $left){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/buy50get10.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $buy_60_get_30 = $_product->getAttributeText('buy_60_get_30');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $buy_60_get_30 == $right){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/buy60get30.png\" border=0>";
+                             echo "<br />";
+                            }elseif ($buy_60_get_30 == $left){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/buy60get30.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $rated_90 = $_product->getAttributeText('rated_90');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $rated_90 == $right){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/rated_90.png\" border=0>";
+                             echo "<br />";
+                            }elseif ($rated_90 == $left){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/rated_90.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $rated_91 = $_product->getAttributeText('rated_91');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $rated_91 == $right){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/rated_91.png\" border=0>";
+                             echo "<br />";
+                            }elseif ($rated_91 == $left){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/rated_91.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $rated_92 = $_product->getAttributeText('rated_92');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $rated_92 == $right){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/rated_92.png\" border=0>";
+                             echo "<br />";
+                            }elseif ($rated_92 == $left){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/rated_92.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $rated_93 = $_product->getAttributeText('rated_93');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $rated_93 == $right){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/rated_93.png\" border=0>";
+                             echo "<br />";
+                            }elseif ($rated_93 == $left){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/rated_93.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $rated_94 = $_product->getAttributeText('rated_94');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $rated_94 == $right){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/rated_94.png\" border=0>";
+                             echo "<br />";
+                            }elseif ($rated_94 == $left){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/rated_94.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $rated_95 = $_product->getAttributeText('rated_95');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $rated_95 == $right){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/rated_95.png\" border=0>";
+                             echo "<br />";
+                            }elseif ($rated_95 == $left){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/rated_95.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $pack_5 = $_product->getAttributeText('pack_5');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $pack_5 == $right){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/5pk.png\" border=0>";
+                             echo "<br />";
+                            }elseif ($pack_5 == $left){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/5pk.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $off_10 = $_product->getAttributeText('off_10');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $off_10 == $right){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/10OFF.png\" border=0>";
+                             echo "<br />";
+                            }elseif ($off_10 == $left){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/10OFF.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $off_2 = $_product->getAttributeText('off_2');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $off_2 == $right){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/2OFF.png\" border=0>";
+                             echo "<br />";
+                            }elseif ($off_2 == $left){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/2OFF.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $off_5 = $_product->getAttributeText('off_5');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $off_5 == $right){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/5OFF.png\" border=0>";
+                             echo "<br />";
+                            }elseif ($off_5 == $left){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/5OFF.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $off_399 = $_product->getAttributeText('off_399');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $off_399 == $right){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/399OFF.png\" border=0>";
+                             echo "<br />";
+                            }elseif ($off_399 == $left){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/399OFF.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $off_20 = $_product->getAttributeText('off_20');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $off_20 == $right){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/20OFF.png\" border=0>";
+                             echo "<br />";
+                            }elseif ($off_20 == $left){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/20OFF.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $off_3 = $_product->getAttributeText('off_3');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $off_3 == $right){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/3OFF.png\" border=0>";
+                             echo "<br />";
+                            }elseif ($off_3 == $left){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/3OFF.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $free_hoyo = $_product->getAttributeText('free_hoyo');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $free_hoyo == $right){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/FreeHoyodeMonterreySampler.jpg\" border=0>";
+                             echo "<br />";
+                            }elseif ($free_hoyo == $left){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/FreeHoyodeMonterreySampler.jpg\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $pack_alec = $_product->getAttributeText('pack_alec');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $pack_alec == $right){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/FreeAlec.jpg\" border=0>";
+                             echo "<br />";
+                            }elseif ($pack_alec == $left){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/FreeAlec.jpg\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $free_cao = $_product->getAttributeText('free_cao');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $free_cao == $right){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/FreeCAOgift.jpg\" border=0>";
+                             echo "<br />";
+                            }elseif ($free_cao == $left){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/FreeCAOgift.jpg\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $three_off_5 = $_product->getAttributeText('three_off_5');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $three_off_5 == $right){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/3off5.jpg\" border=0>";
+                             echo "<br />";
+                            }elseif ($three_off_5 == $left){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/3off5.jpg\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $two_off_10 = $_product->getAttributeText('two_off_10');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $two_off_10 == $right){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/2off10.jpg\" border=0>";
+                             echo "<br />";
+                            }elseif ($two_off_10 == $left){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/2off10.jpg\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $two_off_5 = $_product->getAttributeText('two_off_5');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $two_off_5 == $right){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/2off5.jpg\" border=0>";
+                             echo "<br />";
+                            }elseif ($two_off_5 == $left){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/2off5.jpg\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $two_off_6 = $_product->getAttributeText('two_off_6');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $two_off_6 == $right){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/2off6.jpg\" border=0>";
+                             echo "<br />";
+                            }elseif ($two_off_6 == $left){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/2off6.jpg\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $two_off_5_minus = $_product->getAttributeText('two_off_5_minus');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $two_off_5_minus == $right){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/2off5-1.jpg\" border=0>";
+                             echo "<br />";
+                            }elseif ($two_off_5_minus == $left){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/2off5-1.jpg\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $three_off_5_minus = $_product->getAttributeText('three_off_5_minus');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $three_off_5_minus == $right){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/3off5-1.jpg\" border=0>";
+                             echo "<br />";
+                            }elseif ($three_off_5_minus == $left){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/3off5-1.jpg\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $two_off_10_minus = $_product->getAttributeText('two_off_10_minus');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $two_off_10_minus == $right){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/2off10-1.jpg\" border=0>";
+                             echo "<br />";
+                            }elseif ($two_off_10_minus == $left){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/2off10-1.jpg\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+
+          <?php
+              $free_ab = $_product->getAttributeText('free_ab');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $free_ab == $right){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/FreeABMaxx4Pack.jpg\" border=0>";
+                             echo "<br />";
+                            }elseif ($free_ab == $left){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/FreeABMaxx4Pack.jpg\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $free_shipping_25 = $_product->getAttributeText('free_shipping_25');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $free_shipping_25 == $right){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/FreeShipping.jpg\" border=0>";
+                             echo "<br />";
+                            }elseif ($free_shipping_25 == $left){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/FreeShipping.jpg\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $off_6 = $_product->getAttributeText('off_6');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $off_6 == $right){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/6OFF.png\" border=0>";
+                             echo "<br />";
+                            }elseif ($off_6 == $left){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/6OFF.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $super_deal = $_product->getAttributeText('super_deal');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $super_deal == $right){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/SuperDeal8oFF.jpg\" border=0>";
+                             echo "<br />";
+                            }elseif ($super_deal == $left){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/SuperDeal8oFF.jpg\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $free_acid = $_product->getAttributeText('free_acid');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $free_acid == $right){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/FreeAcidKKCig5P.jpg\" border=0>";
+                             echo "<br />";
+                            }elseif ($free_acid == $left){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/FreeAcidKKCig5P.jpg\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $free_oliva = $_product->getAttributeText('free_oliva');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $free_oliva == $right){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/FreeOlivAshTRay.jpg\" border=0>";
+                             echo "<br />";
+                            }elseif ($free_oliva == $left){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/FreeOlivAshTRay.jpg\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $free_ab_tempus = $_product->getAttributeText('free_ab_tempus');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $free_ab_tempus == $right){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/FreeABTEmpus5P.jpg\" border=0>";
+                             echo "<br />";
+                            }elseif ($free_ab_tempus == $left){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/FreeABTEmpus5P.jpg\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $closeout_20 = $_product->getAttributeText('closeout_20');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $closeout_20 == $right){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/20PrOFF.jpg\" border=0>";
+                             echo "<br />";
+                            }elseif ($closeout_20 == $left){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/20PrOFF.jpg\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $free_don_lino = $_product->getAttributeText('free_don_lino');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $free_don_lino == $right){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/FreeDonLinoAfrica.jpg\" border=0>";
+                             echo "<br />";
+                            }elseif ($free_don_lino == $left){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/FreeDonLinoAfrica.jpg\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $free_asti_humidor = $_product->getAttributeText('free_asti_humidor');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $free_asti_humidor == $right){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/FreeAstiHumidor.jpg\" border=0>";
+                             echo "<br />";
+                            }elseif ($free_asti_humidor == $left){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/FreeAstiHumidor.jpg\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $free_cao_last = $_product->getAttributeText('free_cao_last');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $free_cao_last == $right){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/FreeCAOstick.jpg\" border=0>";
+                             echo "<br />";
+                            }elseif ($free_cao_last == $left){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/FreeCAOstick.jpg\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $free_shipping = $_product->getAttributeText('free_shipping');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $free_shipping == $right){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/FreeShipping.jpg\" border=0>";
+                             echo "<br />";
+                            }elseif ($free_shipping == $left){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/FreeShipping.jpg\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $fathers_day = $_product->getAttributeText('fathers_day');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $fathers_day == $right){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/FathersDaygift.jpg\" border=0>";
+                             echo "<br />";
+                            }elseif ($fathers_day == $left){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/FathersDaygift.jpg\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $off_25 = $_product->getAttributeText('off_25');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $off_25 == $right){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/25OFF.png\" border=0>";
+                             echo "<br />";
+                            }elseif ($off_25 == $left){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/25OFF.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $custom_1 = $_product->getAttributeText('custom_1');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $custom_1 == $right){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/custom_1.png\" border=0>";
+                             echo "<br />";
+                            }elseif ($custom_1 == $left){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/custom_1.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $custom_2 = $_product->getAttributeText('custom_2');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $custom_2 == $right){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/custom_2.png\" border=0>";
+                             echo "<br />";
+                            }elseif ($custom_2 == $left){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/custom_2.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $custom_3 = $_product->getAttributeText('custom_3');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $custom_3 == $right){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/custom_3.png\" border=0>";
+                             echo "<br />";
+                            }elseif ($custom_3 == $left){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/custom_3.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+          <?php
+              $custom_4 = $_product->getAttributeText('custom_4');
+              $right = "Yes- Right ";
+              $left = "Yes- Left ";
+                       if ( $custom_4 == $right){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/custom_4.png\" border=0>";
+                             echo "<br />";
+                            }elseif ($custom_4 == $left){
+                             echo "<img src=\"http://cigarsinternationals.com/media/Icons/custom_4.png\" border=0>";
+                             echo "<br />";
+                            };
+          ?>
+</center>
+
+                </div>
+
+        </div>
+
+        <div class="clearer"></div>
+        <?php if ($_product->isSaleable() && $this->hasOptions() && $this->getChildChildHtml('container2') ):?>
+            <div class="options-container-big">
+                <?php echo $this->getChildChildHtml('container2', '', true, true) ?>
+            </div>
+        <?php endif;?>
+    </form>
+
+</div>
+<?php echo $this->getChildHtml('relatedProducts') ?>
+<div class="clear"></div>
+        <?php //echo $this->getChildHtml('upsell_products') ?>
+    <?php echo $this->getChildHtml('who_bought') ?>
+    <?php echo $this->getChildHtml('recently_viewed') ?>
+    <?php echo $this->getChildHtml('product_advancedreviews') ?>
+    <?php echo $this->getChildHtml('reviews') ?>
+    <?php /* ?><div class="tabContainer"><?php echo $this->__('Customer Reviews') ?></div>
+<div class="containerPost">
+
+</div><?php */ ?>
+      <?php //echo $this->getChildHtml('review_form') ?>
+      <?php //echo $this->getLayout()->createBlock('review/form')->setBlockId('product.review.form')->toHtml() ?>
+        <?php //echo $this->getChildHtml('productTagList') ?>
+        <?php echo $this->getChildHtml('product_additional_data') ?>
+<script type="text/javascript">
+//<![CDATA[
+    var productAddToCartForm = new VarienForm('product_addtocart_form');
+    productAddToCartForm.submit = function(button, url) {
+        if (this.validator.validate()) {
+            var form = this.form;
+            var oldUrl = form.action;
+
+            if (url) {
+               form.action = url;
+            }
+            var e = null;
+            try {
+                this.form.submit();
+            } catch (e) {
+            }
+            this.form.action = oldUrl;
+            if (e) {
+                throw e;
+            }
+
+            if (button && button != 'undefined') {
+                button.disabled = true;
+            }
+        }
+    }.bind(productAddToCartForm);
+
+    productAddToCartForm.submitLight = function(button, url){
+        if(this.validator) {
+            var nv = Validation.methods;
+            delete Validation.methods['required-entry'];
+            delete Validation.methods['validate-one-required'];
+            delete Validation.methods['validate-one-required-by-name'];
+            if (this.validator.validate()) {
+                if (url) {
+                    this.form.action = url;
+                }
+                this.form.submit();
+            }
+            Object.extend(Validation.methods, nv);
+        }
+    }.bind(productAddToCartForm);
+//]]>
+</script>

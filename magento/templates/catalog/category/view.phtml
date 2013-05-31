@@ -1,0 +1,192 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     enterprise_default
+ * @copyright   Copyright (c) 2011 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+?>
+<?php
+/**
+ * Category view template
+ *
+ * @see Mage_Catalog_Block_Category_View
+ */
+?>
+<?php
+    $_helper    = $this->helper('catalog/output');
+    $_category  = $this->getCurrentCategory();
+    $_imgHtml   = '';
+    if ($_imgUrl = $_category->getImageUrl()) {
+        $_imgHtml = '<p class="category-image"><img src="'.$_imgUrl.'" alt="'.$this->htmlEscape($_category->getName()).'" title="'.$this->htmlEscape($_category->getName()).'" /></p>';
+        $_imgHtml = $_helper->categoryAttribute($_category, $_imgHtml, 'image');
+    }
+?>
+<!-- MediaForge Code -->
+              <script type="text/javascript" src="http://tags.mediaforge.com/js/361/?prodID=<?php echo $this->getCurrentCategory()->getName()?>"></script>
+<?php echo $this->getMessagesBlock()->toHtml() ?>
+<!--<div class="innerHeading">
+<?php /*if($this->IsRssCatalogEnable()): ?>
+    <a href="<?php echo $this->getRssLink() ?>" title="<?php echo $this->__('Subscribe to RSS Feed') ?>" class="rss-feed"><?php echo $this->__('Subscribe to RSS Feed') ?></a>
+<?php endif;*/ ?>
+    <?php echo $_helper->categoryAttribute($_category, $this->getCurrentCategory()->getName(), 'name') ?>
+</div>-->
+    <?php if($_imgUrl): ?>
+        <?php //echo $_imgHtml ?>
+    <?php endif; ?>
+
+    <?php if($_description=$this->getCurrentCategory()->getDescription()): ?>
+        <div class="bodyTxt">
+            <?php echo $_helper->categoryAttribute($_category, $_description, 'description') ?>
+        </div>
+    <?php endif; ?>
+	<?php //$subcategories = $this->getCurrentCategory()->getChildrenCategories();
+		$helper    = $this->helper('catalog/output');	
+		$cur_cat = $this->getCurrentCategory();
+		/* @var $category Mage_Catalog_Model_Category */
+        $subcategories = Mage::getModel('catalog/category')->getCollection();
+        /* @var $collection Mage_Catalog_Model_Resource_Eav_Mysql4_Category_Collection */
+        $subcategories->addAttributeToSelect('url_key')
+            ->addAttributeToSelect('image')
+            ->addAttributeToSelect('name')
+            ->addAttributeToSelect('is_anchor')
+            ->addAttributeToFilter('is_active', 1)
+            ->addIdFilter($cur_cat->getChildren())
+            ->joinUrlRewrite()
+			->addAttributeToSort('name', 'asc')
+            ->load();
+		//echo "<pre>";
+		//print_r($collection);
+		//echo "</pre>";
+	?>
+
+	<?php if ($cur_cat->getId() == 3 or $cur_cat->getId() == 4 or $cur_cat->getId() == 7 or $cur_cat->getId() == 8 or $cur_cat->getId() == 10 or $cur_cat->getId() == 11 or $cur_cat->getId() == 274 or $cur_cat->getId() == 18 or $cur_cat->getId() == 19 or $cur_cat->getId() == 991 or $cur_cat->getId() == 994 or $cur_cat->getId() == 1002 or $cur_cat->getId() == 1006 or $cur_cat->getId() == 1008): ?>
+	<div class="searchspring-results_container">
+	 <?php if (count($subcategories) > 0): ?>
+                    <table border="0" cellpadding="0" cellspacing="4" width="100%">
+					  <tbody>
+					  <tr>
+                        <?php $i=1;
+						foreach($subcategories as $_subcategory): ?>
+						<?php //echo $_subcategory->getId()."<br>";
+						$_child = Mage::getModel( 'catalog/category' )->load($_subcategory->getId()); 
+						$_imgHtml1   = '';
+						$_subcat = $_child->getName();
+						if ($_imgUrl1 = $_child->getImageUrl()) {
+							$_imgHtml1 = '<a href="'.$_child->getUrl().'"><img src="'.$_imgUrl1.'" alt="'.$this->htmlEscape($_child->getName()).'" title="'.$this->htmlEscape($_child->getName()).'" width="100" height="100" /></a>';
+							$_imgHtml1 = $_helper->categoryAttribute($_child, $_imgHtml1, 'image');
+						}
+						?>
+    <?php if ($_subcat == 'Disposable Electronic Cigarette' or $_subcat == 'Rechargeable Electronic Cigarettes'): ?>
+	<?php else: ?> 
+    <td align="center" width="25%" style="text-align:center;"><?php if($_imgUrl1): ?>
+								<?php echo $_imgHtml1 ?>
+								<br>
+							<?php endif; ?>
+							<?php if ($_subcat == 'Disposable Electronic Cigarette' or $_subcat == 'Rechargeable Electronic Cigarettes'): ?>
+							<?php else: ?>
+							<a href="<?php echo $_child->getUrl() ?>"><?php echo $_child->getName() ?></a><?php endif; ?><br></td>
+     <?php endif; ?>
+  
+							
+                                
+                        <?php 
+							if($i%4==0) {
+								echo '</tr>
+  <tr>
+    <td height="10" colspan="4">&nbsp;</td>
+  </tr><tr>';
+							}
+						$i++;
+						endforeach; ?>
+                    </tr>
+  <tr>
+    <td height="10" colspan="4">&nbsp;</td>
+  </tr>
+</tbody></table>
+     <?php endif; ?>
+	</div>
+	<script type='text/javascript' src='//s3.amazonaws.com/a.cdn.searchspring.net/ajax_search/sites/niuzpc/js/niuzpc.js'></script>
+		<script type='text/javascript' src='//d2r7ualogzlf1u.cloudfront.net/ajax_search/js/searchspring-catalog.min.js'></script>
+		<script type='text/javascript'>
+			SearchSpring.Catalog.init({
+				sortType: 'dropdown',
+				showSummary: true,
+				leaveInitialResults: true,
+				maxFacetOptions: 500,
+				backgroundFilters: {
+					parent_category: ["<?php echo $this->getCurrentCategory()->getName(); ?>"]
+				}
+			});
+		</script>
+	
+	<?php else: ?>
+	<?php 
+		$categoryList = Array();
+		$categoryList[] = $this->getCurrentCategory()->getName();
+		if (count($subcategories) > 0) {
+			foreach($subcategories as $subcategory) {
+				$categoryList[] = $this->htmlEscape(Mage::getModel( 'catalog/category' )->load($subcategory->getId())->getName());
+			}
+		}
+	?>
+
+    <?php if($this->isContentMode()): ?>
+        <?php echo $this->getCmsBlockHtml() ?>
+
+    <?php elseif($this->isMixedMode()): ?>
+        <?php echo $this->getCmsBlockHtml() ?>
+        <?php /* echo $this->getProductListHtml() */ ?>
+		<div class="searchspring-results_container"></div>
+        <script type='text/javascript' src='//s3.amazonaws.com/a.cdn.searchspring.net/ajax_search/sites/niuzpc/js/niuzpc.js'></script>
+		<script type='text/javascript' src='//d2r7ualogzlf1u.cloudfront.net/ajax_search/js/searchspring-catalog.min.js'></script>
+		<script type='text/javascript'>
+			SearchSpring.Catalog.init({
+				sortType: 'dropdown',
+				showSummary: true,
+				maxFacetOptions: 500,
+				backgroundFilters: {
+					category: ["<?php echo preg_replace('/"/', '', $this->getCurrentCategory()->getName()); ?>"]
+				}
+			});
+		</script>
+
+    <?php else: ?>
+        <?php /* echo $this->getProductListHtml() */ ?>
+		<div class="searchspring-results_container"></div>
+        <script type='text/javascript' src='//s3.amazonaws.com/a.cdn.searchspring.net/ajax_search/sites/niuzpc/js/niuzpc.js'></script>
+		<script type='text/javascript' src='//d2r7ualogzlf1u.cloudfront.net/ajax_search/js/searchspring-catalog.min.js'></script>
+		<script type='text/javascript'>
+			SearchSpring.Catalog.init({
+				sortType: 'dropdown',
+				showSummary: true,
+				maxFacetOptions: 500,
+				backgroundFilters: {
+					category: ["<?php echo preg_replace('/"/', '', $this->getCurrentCategory()->getName()); ?>"]
+				}
+			});
+		</script>
+
+    <?php endif; ?>	
+	
+    <?php endif; ?>
+    
+         

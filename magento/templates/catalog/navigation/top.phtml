@@ -1,0 +1,237 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2011 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+?>
+<?php
+/**
+ * Top menu for store
+ *
+ * @see Mage_Catalog_Block_Navigation
+ */
+?>
+<?php
+/**
+ * $this->renderCategoriesMenuHtml() supports optional arguments:
+ * int Level number for list item class to start from
+ * string Extra class of outermost list items
+ * string If specified wraps children list in div with this class
+ */
+?>
+<?php $_menu = $this->renderCategoriesMenuHtml(0,'level-top') ?>
+<?php if($_menu): ?>
+<div class="navigation_wrap">
+	<div class="navigation_sec">
+		<ul class="nav_ul_text">
+		<li class="first"><a href="<?php echo $this->getUrl('') ?>"><span>Home</span></a></li>
+		<?php //echo $_menu ?>
+		<li class="first"><a href="<?php echo $this->getUrl('') ?>cigars.html"><span>Cigars</span></a>
+		<ul class="level0">
+			
+			<li class="level1 nav-3-1 first">
+			<a href="<?php echo $this->getUrl('') ?>cigars.html">
+			<span>All Cigar Brands</span>
+			</a>
+			</li>
+			<li class="level1 nav-3-1 first">
+			<a href="<?php echo $this->getUrl('') ?>cigars/premium-cigars.html">
+			<span>Premium Cigars</span>
+			</a>
+			</li><li class="level1 nav-3-2">
+			<a href="<?php echo $this->getUrl('') ?>cigars/machine-made-cigars.html">
+			<span>Machine Made Cigars</span>
+			</a>
+			</li><li class="level1 nav-3-3">
+			<a href="<?php echo $this->getUrl('') ?>cigars/little-cigars.html">
+			<span>Little Cigars</span>
+			</a>
+			</li><li class="level1 nav-3-4">
+			<a href="<?php echo $this->getUrl('') ?>cigars/filtered-cigars.html">
+			<span>Filtered Cigars</span>
+			</a>
+			</li><li class="level1 nav-3-5">
+			<a href="<?php echo $this->getUrl('') ?>cigars/cigar-tins.html">
+			<span>Cigar Tins</span>
+			</a>
+			</li><li class="level1 nav-3-7 last">
+			<a href="<?php echo $this->getUrl('') ?>cigars/tubed-cigars.html">
+			<span>Tube Cigars</span>
+			</a>
+			</li><li class="level1 nav-3-6">
+			<a href="<?php echo $this->getUrl('') ?>cigars/top-cigars-rated-90.html">
+			<span>Cigars Rated 90 +</span>
+			</a>
+			</li><li class="level1 nav-3-6">
+			<a href="<?php echo $this->getUrl('') ?>cigars/premium-cigars/alec-bradley-tempus-cigar-seconds.html">
+			<span>Tempus Cigars Seconds</span>
+			</a>
+			</li>
+		</ul>
+		</li>
+		<li class="first"><a href="<?php echo $this->getUrl('') ?>cigar-samplers.html"><span>Cigar Samplers</span></a>
+		<ul class="level0">
+			<li class="level1 nav-3-1 first">
+			<a href="<?php echo $this->getUrl('') ?>cigar-five-pack.html">
+			<span>5 Pack Tastings</span>
+			</a>
+			</li><li class="level1 nav-3-2">
+			<a href="<?php echo $this->getUrl('') ?>cigar-samplers.html">
+			<span>Factory Samplers</span>
+			</a></li>
+		</ul>
+		</li>
+		<li class="first"><a href="<?php echo $this->getUrl('') ?>cigar-deals.html"><span>Specials</span></a>
+		<ul class="level0">
+			<li class="level1 nav-3-1 first">
+			<a href="<?php echo $this->getUrl('') ?>cigar-deals.html">
+			<span>Cigar Specials</span>
+			</a>
+			</li>
+			<li class="level1 nav-3-2">
+			<a href="<?php echo $this->getUrl('') ?>cigar-closeouts.html">
+			<span>Closeout Items</span>
+			</a>
+			</li><li class="level1 nav-3-2">
+			<a href="<?php echo $this->getUrl('') ?>free-cigars.html">
+			<span>Free Stuff</span>
+			</a></li><!--<li class="level1 nav-3-1 first">
+			<a href="<?php echo $this->getUrl('') ?>lap-cigar-deals.html">
+			<span>LAP Deals</span>
+			</a>
+			</li>--><li class="level1 nav-3-2">
+			<a href="<?php echo $this->getUrl('') ?>cigar-deals/free-shipping-cigars.html">
+			<span>Free Shipping Cigars</span>
+			</a></li>
+		</ul>
+		</li>
+		<li class="first"><a href="<?php echo $this->getUrl('') ?>cigar-humidors.html"><span>Cigar Humidors</span></a></li>
+		<li class="first"><a href="<?php echo $this->getUrl('') ?>cigar-accessories.html"><span>Cigar Accessories</span></a>
+		<ul class="level0">
+			<li class="level1 nav-3-1 first">
+			<a href="<?php echo $this->getUrl('') ?>cigar-accessories/cigar-cutters.html">
+			<span>Cigar Cutters</span>
+			</a>
+			</li><li class="level1 nav-3-2">
+			<a href="<?php echo $this->getUrl('') ?>cigar-accessories/cigar-lighters.html">
+			<span>Cigar Lighters</span>
+			</a></li>
+			<li class="level1 nav-3-2">
+			<a href="<?php echo $this->getUrl('') ?>cigar-accessories/lotus-cigar-lighters.html">
+			<span>Lotus Cigar Lighters</span>
+			</a></li><li class="level1 nav-3-1 first">
+			<a href="<?php echo $this->getUrl('') ?>cigar-accessories/other-cigar-accessories.html">
+			<span>Other Cigar Accessories</span>
+			</a>
+			</li><li class="level1 nav-3-2">
+			<a href="<?php echo $this->getUrl('') ?>cigar-accessories/empty-cigar-boxes.html">
+			<span>Empty Cigar Boxes</span>
+			</a></li>
+			<li class="level1 nav-3-2">
+			<a href="<?php echo $this->getUrl('') ?>cigarette-paper.html">
+			<span>Cigarette Paper</span>
+			</a></li>
+		</ul>
+		</li>
+		<li class="first"><a href="<?php echo $this->getUrl('') ?>cigar-gifts.html"><span>Cigar Gifts</span></a>
+		<ul class="level0">
+			<li class="level1 nav-3-1 first">
+			<a href="<?php echo $this->getUrl('') ?>cigar-gifts/cigar-gifts-under-25.html">
+			<span>Cigar Gifts Under $25</span>
+			</a></li>
+            <li class="level1 nav-3-2">
+			<a href="<?php echo $this->getUrl('') ?>cigar-gifts/cigar-gifts-between-25-50.html">
+			<span>Cigar Gifts Between $25 - $50</span>
+			</a>
+			</li>
+            <li class="level1 nav-3-2">
+			<a href="<?php echo $this->getUrl('') ?>cigar-gifts/cigar-gifts-between-50-100.html">
+			<span>Cigar Gifts Between $50 - $100</span>
+			</a>
+			</li>
+			<li class="level1 nav-3-2">
+			<a href="<?php echo $this->getUrl('') ?>cigar-gifts/cigar-gifts-100-above.html">
+			<span>Cigar Gifts $100 & Above</span>
+			</a>
+			</li>
+			<li class="level1 nav-3-2">
+			<a href="<?php echo $this->getUrl('') ?>gift-certificates.html">
+			<span>Gift Certificates</span>
+			</a>
+			</li>
+		</ul>
+		</li>
+		<li class="first"><a href="<?php echo $this->getUrl('') ?>e-cigarettes.html"><span>E-Cigarettes</span></a>
+		<ul class="level0">
+			<li class="level1 nav-3-1 first">
+			<a href="<?php echo $this->getUrl('') ?>e-cigarettes.html"><span>E-Cigarette Brands</span>
+			</a></li>
+			<li class="level1 nav-3-2">
+			<a href="<?php echo $this->getUrl('') ?>e-cigarettes/rechargeable-electronic-cigarettes.html">
+			<span>Rechargeable E-Cig</span>
+			</a>
+			</li>
+			<li class="level1 nav-3-2">
+			<a href="<?php echo $this->getUrl('') ?>e-cigarettes/disposable-electronic-cigarette-e-cigarettes.html">
+			<span>Disposable E-Cigarettes</span>
+			</a>
+			</li>
+		</ul>
+		</li>
+		<li class="first"><a href="<?php echo $this->getUrl('customer-service') ?>"><span>Customer Service</span></a>
+		<ul class="level0">
+			<li class="level1 nav-3-1 first">
+			<a href="<?php echo $this->getUrl('customer/account') ?>">
+			<span>My Account</span>
+			</a>
+			</li><li class="level1 nav-3-2">
+			<a href="<?php echo $this->getUrl('faq') ?>">
+			<span>FAQs</span>
+			</a>
+			</li><li class="level1 nav-3-3">
+			<a href="<?php echo $this->getUrl('return-policy') ?>">
+			<span>Return Policy</span>
+			</a>
+			</li><li class="level1 nav-3-4">
+			<a href="<?php echo $this->getUrl('shipping-info') ?>">
+			<span>Shipping Info</span>
+			</a>
+			</li><li class="level1 nav-3-5">
+			<a href="<?php echo $this->getUrl('privacy-policy') ?>">
+			<span>Privacy Policy</span>
+			</a>
+			</li><li class="level1 nav-3-6">
+			<a href="<?php echo $this->getUrl('security-policy') ?>">
+			<span>Security Policy</span>
+			</a>
+			</li><li class="level1 nav-3-7 last">
+			<a href="<?php echo $this->getUrl('contacts') ?>">
+			<span>Contact Us</span>
+			</a>
+			</li>
+		</ul>
+		</li>
+    </ul>
+	</div>
+</div>
+<?php endif ?>
