@@ -1,0 +1,15 @@
+- 
+  - wrong_name
+  - name: null
+    email: ebrightsolutions@gmail.com
+    comment: test
+-
+  - wrong_email
+  - name: Zaria
+    email: ebrightwebsolutions.com
+    comment: test
+-
+  - ok
+  - name: Zaria
+    email: ebrightsolutions@gmail.com
+    comment: test
