@@ -15,6 +15,13 @@
        			</args>	
     		</checkout>	
     	</routers>	
+    	<layout>
+    		<updates>
+    			<onestepcheckout>
+    				<file>onestepcheckout.xml</file>
+    			</onestepcheckout>	
+    		</updates>	
+    	</layout>	
     </frontend>	
     <global>
         <models>
