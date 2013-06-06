@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <CustomWork_ControllerTest>
+            <version>0.0.0.0.1</version>
+        </CustomWork_ControllerTest>
+    </modules>
+    <frontend>
+    	<routers>
+    		<controller_test>
+    			<args>
+    				<use>standard</use>
+    			    <module>CustomWork_ControllerTest</module>
+    			    <frontName>requestflowtest</frontName>
+    			</args>    
+    		</controller_test>
+    	</routers>		
+    </frontend>	
+    <global>
+        <models>
+            <controller_test>
+                <class>CustomWork_ControllerTest_Model</class>
+                <resourceModel>controllertest_mysql4</resourceModel>
+            </controller_test>
+            <controllertest_resource>
+                <class>CustomWork_ControllerTest_Model_Mysql4</class>
+                <entities>
+                </entities>
+            </controllertest_resource>
+        </models>
+        <blocks>
+            <controller_test>
+                <class>CustomWork_ControllerTest_Block</class>
+            </controller_test>
+        </blocks>
+    </global>
+    <adminhtml>
+    </adminhtml>
+    <admin>
+    </admin>
+</config>

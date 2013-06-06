@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <CustomWork_OneStepCheckout>
+            <version>0.0.0.0.1</version>
+        </CustomWork_OneStepCheckout>
+    </modules>
+    <frontend>
+    	<routers>
+    		<checkout>
+    			<args>  
+    				<modules>  /*after because using a new method*/
+    				   <onestepcheckout after="Mage_Checkout">CustomWork_OneStepCheckout</onestepcheckout>
+    				</modules>
+       			</args>	
+    		</checkout>	
+    	</routers>	
+    </frontend>	
+    <global>
+        <models>
+            <onestepcheckout>
+                <class>CustomWork_OneStepCheckout_Model</class>
+                <resourceModel>onestepcheckout_mysql4</resourceModel>
+            </onestepcheckout>
+            <onestepcheckout_mysql4>
+                <class>CustomWork_OneStepCheckout_Model_Mysql4</class>
+                <entities>
+                </entities>
+            </onestepcheckout_mysql4>
+        </models>
+        <blocks>
+            <onestepcheckout>
+                <class>CustomWork_OneStepCheckout_Block</class>
+            </onestepcheckout>
+        </blocks>
+    </global>
+    <adminhtml>
+    </adminhtml>
+    <admin>
+    </admin>
+</config>
