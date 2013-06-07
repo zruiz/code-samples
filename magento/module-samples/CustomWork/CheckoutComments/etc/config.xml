@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <CustomWork_CheckoutComments>
+            <version>0.0.0.0.1</version>
+        </CustomWork_CheckoutComments>
+    </modules>
+    <global>
+    	<resources> <!--look for the setup script>-->
+    		<checkoutcomments_setup>
+    			<setup>
+    				<module>CustomWork_CheckoutComments</module>
+    			</setup>	
+    	</resources>	
+        <models>
+            <checkoutcomments>
+                <class>CustomWork_CheckoutComments_Model</class>
+                <resourceModel>checkoutcomments_resource</resourceModel>
+            </checkoutcomments>
+            <checkoutcomments_resource>
+                <class>CustomWork_CheckoutComments_Model_Resource</class>
+                <entities>
+                	<comments>
+                		<table>checkout_comments</table>
+                	</comments>
+                 </entities>
+            </checkoutcomments_resource>
+        </models>
+        <blocks>
+            <checkoutcomments>
+                <class>CustomWork_CheckoutComments_Block</class>
+            </checkoutcomments>
+        </blocks>
+    </global>
+    <adminhtml>
+    </adminhtml>
+    <admin>
+    </admin>
+</config>
