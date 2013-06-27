@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>History API</title>
+</head>
+<body>
+	<ul>
+		<li><a href="http://image1.jpg" title="image 1"></a>Image 1</li>
+		<li><a href="http://image2.jpg" title="image 2"></a>Image 2</li>
+		<li><a href="http://image3.jpg" title="image 3"></a>Image 3</li>
+	</ul>
+<script>
+	history.go();
+	history.go(-1);
+	history.go(2);
+	history.go(0);
+	history.forward();
+	history.back();
+	history.pushState(
+		//data
+		//title
+		//url
+		'data',
+		'My Page Title',
+		'page'
+		);
+</script>
+</body>
+</html>

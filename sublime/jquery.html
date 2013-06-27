@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>My First JQuery Function</title>
+        
+        <style>
+            /*.emphasis { color:green;}*/
+			.container { color:green; }
+			/*grabs all children, grandchildren*/
+			ul.emphasis li {} 
+			/*grabs only children*/
+			ul.emphasis > li {}
+			
+        </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+        <script>
+            jQuery(document).ready(function($) {
+        		jQuery('li:first-child').css('font-weight', 'bold');
+        	});
+        	$(document).ready(function() {
+        		$('ul').addClass("emphasis");
+        	});
+
+        	$(document).ready(function() {
+
+        	});
+        </script>
+    </head>
+    <body class="container">
+        <ul class="emphasis">
+        	<li>Hello</li>
+        	<li>Hola
+        	    <ul>
+        	    	<li>Adios</li>
+        	    </ul>
+        	</li>
+        	<li>Aloha</li>
+        	<li>
+	        	<ul>
+	        		<li>Hello from the next one</li>
+	        	</ul>
+        	</li>
+        </ul>
+        <script type="text/javascript">
+			var lis = jQuery('ul li');
+            	console.log(lis);
+
+            // $('ul.emphasis').children("li").css("color", "red");
+            // $('ul.emphasis').children("li:first").css("color", "red");
+            // $('ul.emphasis').children("li").first().addClass("emphasis");
+            // $('ul.emphasis').children("li:nth-child(2)").text("added with jquery");
+            // $('ul.emphasis').children("li").eq(0).addClass("emphasis");
+            // $('ul.emphasis').children("li").eq(2).next().addClass("emphasis");
+            // $('ul.emphasis').children("li").eq(2).prev().addClass("emphasis");
+            // $('ul.emphasis').find("li").css("color", "red");
+            // $('ul.emphasis').find("li:nth-child(1)").css("color", "red");
+            // $('ul.emphasis li:nth-child(3)').css("color", "red");
+
+            $('li').parent('ul').removeClass("emphasis");
+            $('li').parents('div.container').removeClass("container");
+            $('li').closest('div.container').removeClass("container");
+        </script>
+        
+		<script>
+			$('document').ready(function() {
+		    
+		    function mouseout($this) {
+		        $this.removeClass('hover');
+		        try {
+		            getChildren($this).removeClass('children');
+		        } catch (err) {
+		            console.error('error in user code');
+		        }
+		    
+		    }
+		    
+		    function mouseover($this) {
+		        $this.addClass('hover');
+		        try {
+		            getChildren($this).addClass('children');
+		        } catch(err) {
+		            console.error('error in user code');
+		        }
+		    }
+
+		    $('div').hover(
+		        function() {
+		            //remove the styling from its parent
+		            var $this = $(this);
+		            if ($this.parent().is('div')) {
+		                mouseout($this.parent());
+		            }
+		            mouseover($this);
+		        },
+		        
+		        function() {
+		            var $this = $(this);
+		            mouseout($this);
+		            if ($this.parent().is('div')) {
+		                mouseover($this.parent());
+		            }
+		        }
+		    );
+
+
+		});
+		</script>
+    </body>
+</html>

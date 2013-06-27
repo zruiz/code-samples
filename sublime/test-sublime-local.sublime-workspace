@@ -1,0 +1,568 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"sum",
+				"submit()	jQuery"
+			],
+			[
+				"fun",
+				"fun	Function"
+			],
+			[
+				"clo",
+				"close	jsWindow"
+			],
+			[
+				"contact",
+				"contactForm"
+			],
+			[
+				"margin",
+				"margin"
+			],
+			[
+				"at",
+				"attr()	jQuery"
+			],
+			[
+				"pre",
+				"preventDefault	jsEvent"
+			],
+			[
+				"loa",
+				"load()	jQueryDeprecated"
+			],
+			[
+				"image",
+				"image1"
+			],
+			[
+				"mar",
+				"margin-left"
+			],
+			[
+				"slide",
+				"slideToggle()	jQuery"
+			],
+			[
+				"ab",
+				"absolute"
+			],
+			[
+				"prepen",
+				"prependTo()	jQuery"
+			],
+			[
+				"add",
+				"addClass()	jQuery"
+			],
+			[
+				"ad",
+				"addClass()	jQuery"
+			],
+			[
+				"rea",
+				"ready	$(document).ready"
+			],
+			[
+				"j",
+				"jquery	HTML - Include jQuery"
+			],
+			[
+				"a",
+				"all"
+			],
+			[
+				"rg",
+				"rgba()"
+			],
+			[
+				"pa",
+				"padding"
+			],
+			[
+				"wid",
+				"width"
+			],
+			[
+				"fon",
+				"font-family"
+			],
+			[
+				"le",
+				"left"
+			],
+			[
+				"bo",
+				"bold"
+			],
+			[
+				"font",
+				"font-weight"
+			],
+			[
+				"bor",
+				"border-radius"
+			],
+			[
+				"margi",
+				"margin-right"
+			],
+			[
+				"magin",
+				"margin-bottom"
+			],
+			[
+				"lis",
+				"list-style"
+			],
+			[
+				"he",
+				"height"
+			],
+			[
+				"cur",
+				"cursor"
+			],
+			[
+				"ba",
+				"background"
+			],
+			[
+				"te",
+				"text-align"
+			],
+			[
+				"loca",
+				"localStorage	jsProp"
+			],
+			[
+				"html",
+				"html()	jQuery"
+			],
+			[
+				"on",
+				"on()	jQuery"
+			],
+			[
+				"func",
+				"function	jsProp"
+			],
+			[
+				"for",
+				"forward	jsLocation"
+			],
+			[
+				"sett",
+				"setAttribute	jsDOM"
+			],
+			[
+				"doc",
+				"document	jsWindow"
+			],
+			[
+				"in",
+				"input	input - button"
+			],
+			[
+				"Cre",
+				"createElement	jsDOM"
+			],
+			[
+				"togg",
+				"toggle()	jQueryDeprecated"
+			],
+			[
+				"click",
+				"click()	jQuery"
+			],
+			[
+				"s",
+				"script	Tag"
+			],
+			[
+				"hea",
+				"header	Tag"
+			],
+			[
+				"m",
+				"meta	Tag"
+			],
+			[
+				"th",
+				"this"
+			],
+			[
+				"tes",
+				"test	testphpunit"
+			],
+			[
+				"ass",
+				"assc	assertContains"
+			],
+			[
+				"p",
+				"php	<?php … ?>"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+			[
+				"remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"Snippet: tem",
+				"Snippet: DOCTYPE HTML"
+			],
+			[
+				"set syn h",
+				"Set Syntax: HTML5"
+			],
+			[
+				"syntax h",
+				"Set Syntax: HTML5"
+			],
+			[
+				"syntax j",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"linter",
+				"SublimeLinter: Extract Annotations"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"projec",
+				"Project: Save As"
+			],
+			[
+				"fetch",
+				"Fetch: Manage"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"set syntax h",
+				"Set Syntax: HTML"
+			],
+			[
+				"set syntax php",
+				"Set Syntax: PHP"
+			],
+			[
+				"set synta",
+				"Set Syntax: PHP"
+			],
+			[
+				"package control",
+				"Package Control: List Packages"
+			],
+			[
+				"packa",
+				"Package Control: Add Repository"
+			],
+			[
+				"i",
+				"Package Control: Install Package"
+			],
+			[
+				"syntx ht",
+				"Set Syntax: HTML"
+			],
+			[
+				"jque",
+				"Snippet: jQuery AJAX call"
+			],
+			[
+				"set syntax p",
+				"Set Syntax: PHP"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Remove Package"
+			],
+			[
+				"set synta htm",
+				"Set Syntax: HTML"
+			],
+			[
+				"sni",
+				"Snippet: Function"
+			],
+			[
+				"set synta ja",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"snipper",
+				"Snippet: <?php foreach (…) … <?php endforeach ?>"
+			],
+			[
+				"snippe",
+				"Snippet: html"
+			],
+			[
+				"set synt ht",
+				"Set Syntax: HTML"
+			],
+			[
+				"set syntax ja",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"Snippet: ",
+				"Snippet: <?php if (…) ?> … <?php else ?> … <?php endif ?>"
+			],
+			[
+				"snipp",
+				"Snippet: html"
+			],
+			[
+				"side",
+				"View: Toggle Side Bar"
+			],
+			[
+				"sideba",
+				"View: Toggle Side Bar"
+			],
+			[
+				"ht",
+				"Set Syntax: HTML (Tcl)"
+			],
+			[
+				"",
+				"Set Syntax: HTML (Erlang)"
+			]
+		],
+		"width": 568.0
+	},
+	"console":
+	{
+		"height": 125.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/xampp/htdocs/transactrx.com/www.transactrx.com/send-form-email-contact.php",
+		"/C/xampp/htdocs/transactrx.com/www.transactrx.com/style.css",
+		"/C/xampp/htdocs/transactrx.com/www.transactrx.com/includes/nav.php",
+		"/C/xampp/htdocs/transactrx.com/www.transactrx.com/send-form-email-paa-partner.php",
+		"/C/xampp/htdocs/transactrx.com/www.transactrx.com/send-form-email-pharmacies.php",
+		"/C/xampp/htdocs/transactrx.com/www.transactrx.com/send-form-email-physicians.php",
+		"/C/xampp/htdocs/transactrx.com/www.transactrx.com/send-form-email-public-health-departments.php",
+		"/C/xampp/htdocs/transactrx.com/www.transactrx.com/send-form-email-rjhedges-partner.php",
+		"/C/Users/Zaria/Desktop/test sublime/index.php",
+		"/C/Users/Zaria/AppData/Roaming/Sublime Text 2/Packages/SideBarEnhancements/messages/11.13.2012.1305.0.txt",
+		"/C/Users/Zaria/AppData/Roaming/Sublime Text 2/Packages/User/Fetch.sublime-settings",
+		"/C/Users/Zaria/Desktop/test sublime/test/new_file.html",
+		"/C/Users/Zaria/Desktop/test sublime/test.js",
+		"/C/Users/Zaria/AppData/Roaming/Sublime Text 2/Packages/User/javaScript/saif.sublime-snippet",
+		"/C/Users/Zaria/Desktop/test sublime/phpunit.php",
+		"/C/Users/Zaria/AppData/Roaming/Sublime Text 2/Packages/User/hello.sublime-snippet",
+		"/C/Users/Zaria/Desktop/test sublime/test-sublime.sublime-project",
+		"/C/xampp/htdocs/test-sublime/jquery.html",
+		"/C/xampp/htdocs/test-sublime/pseudo-elements.html",
+		"/C/xampp/htdocs/test-sublime/post-basic.html",
+		"/C/xampp/htdocs/test-sublime/post.html",
+		"/C/Users/Zaria/Documents/My Folder/App/Gotham/head/media.phtml",
+		"/C/xampp/htdocs/test-sublime/ajax/index_1.html",
+		"/C/xampp/htdocs/test-sublime/ajax/load.php",
+		"/C/xampp/htdocs/test-sublime/ajax/save.php",
+		"/C/xampp/htdocs/test-sublime/ajax/about.html",
+		"/C/xampp/htdocs/test-sublime/ajax/index_2.html",
+		"/C/xampp/htdocs/transactrx.com/www.transactrx.com/physician-vaccine-billing.php",
+		"/C/xampp/htdocs/test-sublime/animation-jquery.html",
+		"/C/xampp/htdocs/test-sublime/css3.html",
+		"/C/xampp/htdocs/test-sublime/style.css",
+		"/C/xampp/htdocs/test-sublime/style2.css",
+		"/C/xampp/htdocs/test-sublime/style3.css",
+		"/C/xampp/htdocs/test-sublime/animation-jq.html",
+		"/C/xampp/htdocs/test-sublime/animation.html",
+		"/C/xampp/htdocs/test-sublime/ajax/contact.html",
+		"/C/xampp/htdocs/test-sublime/ajax/index.html",
+		"/C/xampp/htdocs/test-sublime/ajax/contact.hmtl",
+		"/C/xampp/htdocs/transactrx.com/www.transactrx.com/medical-blog/wp-content/themes/twentytwelve/sidebar.php",
+		"/C/xampp/htdocs/transactrx.com/www.transactrx.com/demo_07112013.php",
+		"/C/xampp/htdocs/transactrx.com/www.transactrx.com/demo_07162013.php",
+		"/C/xampp/htdocs/transactrx.com/www.transactrx.com/includes/demos.php",
+		"/C/xampp/htdocs/transactrx.com/www.transactrx.com/demo_07312013.php",
+		"/C/xampp/htdocs/transactrx.com/www.transactrx.com/demo_07242013.php",
+		"/C/Users/Zaria/Desktop/test sublime/test_html5.html",
+		"/C/xampp/htdocs/test-sublime/history_html5.html",
+		"/C/xampp/htdocs/test-sublime/project.html",
+		"/C/xampp/htdocs/test-sublime/small.css",
+		"/C/xampp/htdocs/test-sublime/test-sublime-local.sublime-project",
+		"/C/xampp/htdocs/test-sublime/localstorage.html",
+		"/C/xampp/htdocs/transactrx.com/www.transactrx.com/contact.php",
+		"/C/xampp/htdocs/transactrx.com/www.transactrx.com/zostavax-reimbursement.php",
+		"/C/Users/Zaria/AppData/Roaming/Sublime Text 2/Packages/Default/Default (Windows).sublime-keymap",
+		"/C/Users/Zaria/Desktop/webfontkit-20130616-111741/stylesheet.css",
+		"/C/Users/Zaria/AppData/Roaming/Sublime Text 2/Packages/Prefixr/Default (Windows).sublime-keymap",
+		"/C/Users/Zaria/AppData/Roaming/Sublime Text 2/Packages/Autoprefixer/Autoprefixer.sublime-settings",
+		"/C/Users/Zaria/AppData/Roaming/Sublime Text 2/Packages/DocBlockr/Base File.sublime-settings",
+		"/C/Users/Zaria/Desktop/test sublime/project.html",
+		"/C/Users/Zaria/AppData/Roaming/Sublime Text 2/Packages/AdvancedNewFile/Default (Windows).sublime-keymap",
+		"/C/Users/Zaria/AppData/Roaming/Sublime Text 2/Packages/User/Default (Windows).sublime-keymap",
+		"/C/Users/Zaria/AppData/Roaming/Sublime Text 2/Packages/AdvancedNewFile/AdvancedNewFile.sublime-settings",
+		"/C/Users/Zaria/AppData/Roaming/Sublime Text 2/Packages/User/AdvancedNewFile.sublime-settings",
+		"/C/Users/Zaria/AppData/Roaming/Sublime Text 2/Packages/User/Preferences.sublime-settings",
+		"/C/Users/Zaria/Desktop/test sublime/test.html",
+		"/C/Users/Zaria/AppData/Roaming/Sublime Text 2/Packages/SideBarEnhancements/Default.sublime-keymap",
+		"/C/Users/Zaria/AppData/Roaming/Sublime Text 2/Packages/User/phpunit/testphpunit.sublime-snippet",
+		"/C/Users/Zaria/AppData/Roaming/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
+		"/C/Users/Zaria/Desktop/facebook-phpsh/src/phpsh.php"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"#navigation ul#nav li a span",
+			"nav",
+			"#navigation ul#nav li",
+			"	\n",
+			"v",
+			" ;",
+			"padding-left",
+			"5",
+			"h3",
+			"ul",
+			"Footer",
+			"head",
+			"he",
+			"hea",
+			"head",
+			">\n"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 35.0
+	},
+	"input":
+	{
+		"height": 35.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 0.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"send",
+				"transactrx.com/www.transactrx.com/send-form-email-contact.php"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 219.0,
+	"status_bar_visible": true
+}

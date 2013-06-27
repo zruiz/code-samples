@@ -1,0 +1,261 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>My Post Page</title>
+        <style>
+			body {
+				width: 890px;
+                margin: 50px auto;
+			}
+            .box {
+                position: relative;
+                background: red;
+                width: 490px;
+                height: 400px;
+                padding: 0em;
+                float: left;
+                -webkit-transition: border-radius 1s;
+            }
+            
+            .box1 {
+                float: right;
+                position: relative;
+                width: 390px;
+                background: blue;
+                height: 400px;
+            }
+
+            .image-container {
+                float: left;
+                width: 150px;
+                height: 150px;
+                position: relative;
+                padding: 3px 3px 0px 3px;
+            }
+
+            .image, .thumb {
+                float: left;
+                position: relative;
+                padding: 3px 3px 0px 3px;
+            }
+
+            div.image img {
+                width: 150px;
+                height: 150px;
+            }
+
+            div.thumb img {
+                width: 50px;
+                height: 50px;
+            }
+
+            span.image {
+                display: none;
+            }
+
+            span.image img {
+                width: 150px;
+                height: 150px;
+                
+            }
+
+            .content{
+                float: right;
+                position: relative;
+                width: 330px;
+            }
+
+            .button {
+                float: left;
+            }
+
+            .rounded {
+                border-radius: 50px;
+            }
+
+            .overlap {
+                background-image: url('paper.gif');;
+            }
+			
+        </style>      
+    </head>
+    <body>
+    	<h1>Some Content</h1>
+    	<div class="box">
+            <div class="image-container">
+               <div class="image"><img src="images/1.jpg"></div>
+               <div class="thumb"><img src="images/2.jpg"></div>
+               <span class="image"><img src="images/2.jpg"></span>
+            </div>
+            <div class="content">
+    		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni, assumenda, ab fugit doloremque rerum quo ducimus velit numquam tempora alias. Ipsam, sequi, dolores. Odio, sint, architecto rerum minima cum inventore.
+    		</p>
+    		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, minima, magni, blanditiis porro praesentium esse consequatur provident vero magnam earum quasi optio dolores suscipit voluptatum saepe rem veritatis unde quo.</p>
+    		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, minima, magni, blanditiis porro praesentium esse consequatur provident vero magnam earum quasi optio dolores suscipit voluptatum saepe rem veritatis unde quo.</p>
+    		</div>
+    	</div>
+        <div class="box1">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni, assumenda, ab fugit doloremque rerum quo ducimus velit numquam tempora alias. Ipsam, sequi, dolores. Odio, sint, architecto rerum minima cum inventore.
+            </p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, minima, magni, blanditiis porro praesentium esse consequatur provident vero magnam earum quasi optio dolores suscipit voluptatum saepe rem veritatis unde quo.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, minima, magni, blanditiis porro praesentium esse consequatur provident vero magnam earum quasi optio dolores suscipit voluptatum saepe rem veritatis unde quo.</p>
+        </div>
+        <div class="button">
+            <p><button>Increase</button></p>
+            <p><button class="overlap-box">Overlap box</button></p>
+            <p><button class="overlap-image">Overlap image</button></p>
+        </div>       
+    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+    	<script>
+    		$(document).ready(function(){
+
+    			var box = $('div.box'),
+                    fontSize = parseInt(box.css('font-size'), 10);
+
+                // $('button').on('click', function () {
+                //     box.css('font-size', fontSize += 5);
+                // })
+
+                // $('button').on('click', function () {
+                //     box.css('font-size', '-=5');
+                // })
+
+                // $('button').on('click', function () {
+                //     box.css('font-size', '+=5').css('color', 'green');
+                // })
+
+                // best practice call css method only one time
+                // $('button').on('click', function () {
+                //     box.css({
+                //         'font-size': '+=5',
+                //         'color': 'green'});
+                // })
+                
+                //first declaration
+                // $('button').on('click', function () {
+                //     box.animate({
+                //         'font-size': '+=5',
+                //         'width': '+=300'
+                //     }, 500, 'linear', function () {
+                //         console.log('completed');
+                //     });
+                // })
+
+                //second declaration
+                // $('button').on('click', function () {
+                //     box.animate({
+                //         'fontSize': '+=5' //first parameter (property)
+                //     },
+                //     {
+                //         duration: 500, // second parameter (object)
+                //         complete: function () {
+                //             console.log('completed');
+                //         },
+                //         step: function () {
+                //              console.log('The current font size is:' + $(this).css('fontSize'));
+                //             //console.log(this);
+                //         }
+                //     });
+                // })
+
+                //stack animation calls
+                // $('button').on('click', function () {
+                //     box
+                //       .animate({
+                //         'fontSize': '+=5' 
+                //     }, { duration: 500 })
+                //       .animate({ 'top': 50 }, 3000); // occurs after the first animation call
+                //       .animate({ 'top': 50 }, { duration: 300, queue: false }); // occurs along with the first animation
+                // })
+                var winWidth = $(window).width() / 2,
+                    winHeight = $(window).height() / 2,
+                    w = winWidth - box.outerWidth() / 2,
+                    h = winHeight - box.outerHeight() / 2,
+                    l = box.position().left,
+                    t = box.position().top,
+                    box1 = $('div.box1'),
+                    image = $('div.image'),
+                    l_img = image.position().left,
+                    t_img = image.position().top,
+                    span = $('span.image')
+
+
+                //animation with css
+                // $('button.overlap-box').on('click', function () {
+                //     //box.addClass('rounded');
+                //     box1.css({
+                //         'left': l,
+                //         'top': t,
+                //         'position': 'absolute',
+                //         'display' : 'block'
+                //     });
+                // });
+
+                $('button.overlap-image').on('click', function () {
+                   
+                    span.css({
+                        'left': l_img,
+                        'top': t_img,
+                        'position': 'absolute',
+                        'display' : 'block'
+                    });
+                });
+
+                $('div.thumb').hover(
+                    function () {
+                      span.css({
+                        'left': l_img,
+                        'top': t_img,
+                        'position': 'absolute',
+                        'display' : 'block'
+                      })
+                    },
+                    function () {
+                      span.css({
+                        'display' : 'none'
+                      }) 
+                    }
+                );
+
+                //using css jumps into the position
+                // $('button').on('click', function () {
+                //     box.css({
+                //         'left': winWidth,
+                //         'position': 'absolute'
+                //     });
+                // })
+                
+                //using animate moves into the position
+                // $('button').on('click', function () {
+                //     box.animate({
+                //         'left': w,
+                //         'top' : h,
+                //         'position': 'absolute'
+                //     },
+                //     {duration: 5000});
+                // })
+                //stack animation
+                // $('button').on('click', function () {
+                //     box
+                //       .animate({
+                //         'left': w,
+                //         'position': 'absolute'
+                //        })
+                //       .animate({
+                //         'top' : h
+                //        }, 3000)
+                // })
+                
+                //animation with css
+                // $('button').on('click', function () {
+                //     box.addClass('rounded');
+                // })
+
+
+    		});
+    	</script>
+          
+    </body>
+</html>

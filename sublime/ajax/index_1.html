@@ -1,0 +1,182 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+        <title>My Ajax Page</title>
+        <!-- <link rel="stylesheet" href="css/style.css"> -->
+        <link rel="author" href="humans.txt">
+        <style>
+        .container li {
+         	list-style: none;
+         }
+        .popup {
+         	margin: 50px auto;
+         	background: #e3e3e3;
+         	width: 350px;
+         	height: 350px;
+         	padding: 10px;
+         	/*opacity: 0; 
+         	filter: alpha(opacity=0);*/
+         	display: none;
+         	position: relative;
+         }
+
+         /*ul li {
+         	list-style: none;
+         	color: red;
+         }*/
+         span.close {
+                top:10px;
+                position: absolute;
+                right: 10px;
+                cursor: pointer;
+                margin: auto;
+            }
+        </style>
+    </head>
+    <body>
+    	<ul>
+    	<li><a href="about.html">About Me</a></li>
+        <li><a class="contact" href="contact.html">Contact Me</a></li>
+		</ul>
+
+		<div class="wrap"></div>
+
+		<div class="popup">
+			
+		</div>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+		
+        <script>
+        	// (function() {
+        	// 	var wrap= $('.wrap');
+        	// 	$('a').on('click', function (e) {
+        	// 		var href = $(this).attr('href');
+        	// 		wrap.load( href + ' .container');
+        	// 		e.preventDefault();
+        	// 		console.log(href);
+        	// 	});
+        	// })();
+
+        	// (function() {
+        	// 	var popup = $('div.popup');
+        	// 	$('a').on('click', function (e) {
+        	// 		var href = $(this).attr('href');
+        	// 		// popup.css({
+        	// 		// 	'top': 30,
+        	// 		// 	'display' : 'block',
+        	// 		// 	'position' : 'absolute'
+        	// 		//    });
+
+        	// 		popup.animate({
+        	// 			'opacity': 1,
+         //            }, 2000);
+                          
+        	// 		popup.load( href + ' .container');
+        	// 		e.preventDefault();
+        	// 		console.log(href);
+        	// 	});
+        	// })();
+
+        	(function() {
+        		var contactForm = {
+                    container: $('.popup'),  //contactForm.container = contactForm['container'] =  contactForm[variable]
+
+                    config: {
+                        effect: 'slideToggle',
+                        speed: 300
+                    },
+                    // constructor
+    				init: function (config) {
+                        $.extend(this.config, config);
+                        var a =  $('a.contact');
+                            
+                        a.on('click', function (e) {
+                        	console.log(this);
+                        	contactForm.show.call(contactForm);
+                        	e.preventDefault();
+                        });
+                    },
+
+                    show: function () {
+                    	  console.log(this);  //this contactForm
+                          if (this.container.is(':hidden')) {
+                               //this.container .popup
+                               
+                          	   this.close.call(this.container);
+
+                               this.container.load('contact.html .container');
+                          	   this.container.slideToggle("300");
+                          	   this.save.call(this.container);
+                          	 
+                          	   //this.container.on('click', this.close.call(this.container));
+        			      }
+                            			      
+                      
+                    },
+
+                    close: function () {
+                    	//console.log(this);
+                    	var $this = $(this);
+                    	
+                    	// $this.on('click', function () {
+                    	// 	$this.hide();
+                    	// })
+                    	
+	                   	    $.get('contact.html', function ( results ) {
+	                    		  //var span = $(results).find('span.close');
+	                    		  // span.on('click', function () {
+	                    		  // 	$this.hide();
+	                    		  // });
+	                    		 if (results) {
+	                    		 	  $this.off("click", "span.close");
+		                    		  $this.on('click', 'span.close', function (e) {
+		                    		     //$this.slideToggle("300");
+		                    		     //$this.hide();
+		                    		     $this.fadeToggle("5000");
+		                    		     //e.stopPropagation(); 
+		                    		     console.log($this);
+		                    		  });
+	                    		 }
+	                    	});
+	                },
+
+	                save: function () {
+	                	 var $this = $(this);
+	                	 $.get('contact.html', function ( results ) {
+	                        if (results) {
+	                          
+	                          $.get('load.php', function (data) {
+	                          	//console.log(data);
+	                          	$('#comments').val(data);
+	                          });
+
+                		 	  $this.on('submit', 'form', function ( e ) {
+
+		                		$.post('save.php', $(this).serialize(), function (response) {
+		                			//console.log(data);
+		                			alert(response);
+		                		})
+		                		//console.log($this.find('#comments').val());
+		                		//console.log($(this).serialize());
+		                		e.preventDefault();
+	                	      });
+                		    }
+	                    });
+	                },
+
+                };
+
+
+              	contactForm.init({
+              		effect: 'fadeToggle',
+              		speed: 5000
+              	});
+
+        	})();	
+        	
+        </script>
+    </body>
+</html>

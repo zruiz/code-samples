@@ -1,0 +1,148 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>My Post Page</title>
+        <style>
+			body {
+				margin: 50px auto;
+				width: 500px;
+			}
+
+			#contact {
+				background: #e3e3e3;
+				padding: 3px 16px;
+			}
+
+			.js #contact {
+				position: absolute;
+				top: 0;
+				display: none;
+				width: inherit;
+			}
+
+			#contact ul {
+				padding: 0;
+			}
+			#contact ul li {
+				list-style: none;
+				margin-bottom: 1em;
+			}
+
+			#contact form {
+				padding: 5px;
+			}
+
+			#contact form input[type=text]{
+				padding: 0px 0px 10px;
+				width: 100%;
+			}
+
+			#contact form textarea {
+				padding: 0px 0px 10px;
+				width: 100%;
+			}
+
+            .close {
+                top:10px;
+                position: absolute;
+                right: 10px;
+                cursor: pointer;
+            }
+        </style>      
+    </head>
+    <body>
+    	<h1>My Post</h1>
+    	<article>
+    		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni, assumenda, ab fugit doloremque rerum quo ducimus velit numquam tempora alias. Ipsam, sequi, dolores. Odio, sint, architecto rerum minima cum inventore.
+    		</p>
+    		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, minima, magni, blanditiis porro praesentium esse consequatur provident vero magnam earum quasi optio dolores suscipit voluptatum saepe rem veritatis unde quo.</p>
+    		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, minima, magni, blanditiis porro praesentium esse consequatur provident vero magnam earum quasi optio dolores suscipit voluptatum saepe rem veritatis unde quo.</p>
+    		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, minima, magni, blanditiis porro praesentium esse consequatur provident vero magnam earum quasi optio dolores suscipit voluptatum saepe rem veritatis unde quo.</p>
+    	</article>
+
+    	<div id="contact">
+    		<form action="">
+    			<h2>Contact Me</h2>
+    			<ul>
+    				<li><label for="">Name</label><input type="text"></li>
+	    			<li><label for="">Email</label><input type="text"></li>
+	    			<li><label for="">Comments</label><textarea name="comments" id="comments" cols="30" rows="10"></textarea></li>
+	    			<li><input type="submit"></li>
+    			</ul>
+    		</form>
+    	</div>
+                
+    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+    	<script>
+    		$(document).ready(function(){
+
+    			$('html').addClass('js');
+
+    			// declare object containing all methods
+    			var contactForm = {
+                    container: $('#contact'),  //contactForm.container = contactForm['container'] =  contactForm[variable]
+
+                    config: {
+                        effect: 'slideToggle',
+                        speed: 300
+                    },
+
+    				// constructor
+    				init: function (config) {
+                        $.extend(this.config, config);
+    					// console.log(this);
+    					// $('article').children().last('p').append('<p><input type="submit" id="contactme" value="Contact Me"></p>'); testing adding content with selectors
+    					$('<button></button>', {
+    						text: 'Contact Me'
+    					})
+    					    .insertAfter('article')
+    					    .on('click', this.show); // dont put parenthesis show() to not call the function inmediatelly
+    					    					
+    					
+    				},
+
+    				show: function () {
+    				 // console.log('showing');
+                     // console.log(this); this is the button clicked
+                     // var container = $('#contact');
+                     // use contactForm instead of this to refer the #contact div
+                        var cf = contactForm,
+                            container = cf.container,
+                            config = cf.config;
+
+                        if (container.is(':hidden')) {
+                            contactForm.close.call(container); //create the span close first
+                            //contactForm.container.slideToggle("300"); //show the form
+                            container[config.effect](config.speed);
+                        }
+    				},
+
+    				close: function () {
+                        // this in here refers the contact div cause is who's calling the close method
+                        // catch that location within a variable for further use
+                        var $this = $(this); //#contact
+                        if (this.find('span.close').length) return
+    					$('<span class=close>X</span>')
+                            .prependTo($this)
+                            .on('click', function () {
+                                // console.log(this); this is the span clicked
+                                $this[contactForm.config.effect](contactForm.config.speed);
+                            } )
+    				}
+
+    			};
+
+    			// call init method
+
+    			contactForm.init({
+                    effect:'fadeToggle',
+                    speed:500
+                });
+
+    		});
+    	</script>
+          
+    </body>
+</html>

@@ -1,0 +1,91 @@
+<!doctype html>
+<html class="no-js">
+	<head>
+		<meta charset=utf-8>
+		<title>LocalStorage</title>
+		<script scr="http://modernizr.com/downloads/modernizr-latest.js"></script>
+		<style>
+		    label, input[type=submit] {display: block;}
+		</style>
+	</head>
+	<body>
+		<header><h1>LocalStorage</h1></header>
+		<div class="container">
+			<h2>Enter your comment</h2>
+			<form action="">
+				<label for="comment">Your comment?</label>
+				<textarea name="comment" id="comment" cols="30" rows="10"></textarea>
+				<input type="submit">
+			</form>
+		</div>
+		<footer></footer>
+		<script>
+		    //detect localStorage support
+			//if (Modernizr.localstorage) {
+			   
+				//save comment every 5 s while writing in textarea
+				var comment = document.getElementById('comment'),
+					updateInterval;	
+				//when page subsequently loads detect storage, and apply value to text area
+				!!localStorage.comment && (comment.value = localStorage.comment);
+				if (localStorage.comment) {comment.value = localStorage.comment;}
+
+				comment.addEventListener('focus', function () {
+					updateInterval = setInterval(function () {
+						//console.log('running');
+						localStorage.setItem('comment', comment.value);
+					}, 5000) 
+				}, false);
+
+				comment.addEventListener('blur', function () {
+					clearInterval(updateInterval);
+				}, false);
+			//}
+		</script>
+
+		<script>
+			if (localStorage.getItem('name')){
+				document.querySelector('h1').innerHTML = localStorage.getItem('name');
+			}
+			localStorage.setItem('name', 'Zaria Ruiz');
+            
+            //different ways to set a key value pair
+            localStorage.setItem('name', 'Zaria Ruiz');
+			localStorage.name = 'Zaria Ruiz';
+			localStorage['name'] = 'Zaria Ruiz';
+			// var name
+			localStorage[name] = 'Zaria Ruiz';
+
+			//different ways to get a key value pair
+			localStorage.getItem('name');
+			localStorage.name;
+
+			//different ways to remove item
+			localStorage.removeItem('name');
+			delete localStorage.name;
+
+			localStorage.clear();
+
+			//feature detection manual
+			
+			var supportsStorage = function () {
+				try {
+					return 'localStorage' in window && window[localStorage] !== null;
+				} catch(e) {
+					return false;
+				}
+			};
+
+			if (supportsStorage) {
+                  //alert('Supports!');
+			}
+
+			//load Modernizr
+			
+			if (Modernizr.localstorage) {
+				 //alert('Supports!');
+			}
+
+		</script>
+	</body>
+</html>

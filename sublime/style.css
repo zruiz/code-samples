@@ -1,0 +1,165 @@
+/*web-font-kit*/
+@font-face {
+    font-family: 'vitamin_outlinedregular';
+    src: url('fonts/vitamino-webfont.eot');
+    src: url('fonts/vitamino-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/vitamino-webfont.woff') format('woff'),
+         url('fonts/vitamino-webfont.ttf') format('truetype'),
+         url('fonts/vitamino-webfont.svg#vitamin_outlinedregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+body,html {
+	min-height: 100%;
+}
+
+body {
+	background: -webkit-linear-gradient(top, black, white);
+	background: -moz-linear-gradient(top, black, white);
+	background: -o-linear-gradient(top, black, white);
+	background: -ms-linear-gradient(top, black, white);
+	background: linear-gradient(top, black, white);
+}
+
+h1 {
+	font-family: 'vitamin_outlinedregular';
+	color: red;
+}
+
+.container {
+	width: 800px;
+	margin: auto;
+	overflow: hidden;
+}
+
+.container li {
+	float: left;
+	margin-right: 20px;
+	margin-bottom: 20px;
+	width: 200px;
+	height: 200px;
+	background: #e3e3e3;
+	list-style: none;
+	line-height: 200px;
+	text-align: center;
+	font-size: 50px;
+	font-weight: bold;
+}
+
+/*selectors*/
+.container li:first-child {
+	background: green;
+	border-top: none;
+}
+
+.container li:last-child {
+	background: yellow;
+	border-bottom: none;
+}
+
+.container li:nth-child(3n+1) {
+	background: green;
+}
+
+.container li:nth-child(3n-1) {
+	background: orange;
+}
+
+.container li:nth-child(3n+2) {
+	background: orange;
+}
+
+/*adyacent selectors and sibling combinators*/
+.container h2 + p, h2 ~ p {
+	font-size: 1.5em;
+}
+
+/*attribute selectors*/
+a[href="http://www.google.com"] {
+	color:green;
+}
+
+a[href*="tuts"] {
+	color:red;
+}
+
+a[href$=".pdf"]:before {
+	content: "PDF";
+	color:white;
+	margin-right: 5px;
+	font-size: 11px;
+	background: blue;
+    border-radius: 5px;
+    padding: 3px;
+}
+
+a[href^="http"] {
+	color:red;
+}
+
+/*gradients*/
+.box {
+	margin: auto;
+	width: 200px;
+	height: 200px;
+	border-radius: 10px;
+	line-height: 200px;
+	text-align: center;
+	font-size: 35px;
+	background: #666;
+
+	background: -webkit-linear-gradient(top, black 50%, white 90%, red);
+	background: -moz-linear-gradient(top, black 50%, white 90%, red);
+	background: -o-linear-gradient(top, black 50%, white 90%, red);
+	background: -ms-linear-gradient(top, black 50%, white 90%, red);
+	
+	background: linear-gradient(top, black 50%, white 90%, red);
+
+	-webkit-box-shadow: 1px 1px 5px 10px rgba(0,0,0,.4), 0 0 0 5px green, 0 0 0 5px yellow;
+	box-shadow: 
+	   1px 1px 5px 10px rgba(0,0,0,.4), 
+	   0 0 0 5px green, 
+	   0 0 0 5px yellow;
+	text-shadow: 0 1px 0 white;
+}
+
+/*transitions*/
+.transition li{
+	-webkit-transition:padding-left .5s;
+	-moz-transition:padding-left .5s;
+	-o-transition:padding-left .5s;
+	-ms-transition:padding-left .5s;
+	transition:padding-left .5s;
+}
+
+/*li{
+	-webkit-transition:all .5s;
+	-moz-transition:all .5s;
+	-o-transition:all .5s;
+	-ms-transition:all .5s;
+	transition:all .5s;
+}*/
+
+.transition li{
+	-webkit-transition:padding-left .5s, color 2s;
+	-moz-transition:padding-left .5s, color 2s;
+	-o-transition:padding-left .5s, color 2s;
+	-ms-transition:padding-left .5s, color 2s;
+	transition:padding-left .5s, color 2s;
+}
+
+.transition li:hover {
+	padding-left: 10px;
+	cursor: pointer;
+	color: blue;	
+}
+
+p {
+	-webkit-column-count:3;
+	-webkit-column-width:200px;
+	-webkit-columns:3;
+	-webkit-columns:200px;
+	-webkit-column-gap:50px;
+}

@@ -1,0 +1,32 @@
+body {
+	width: 80%;
+	margin: 50px auto;
+}
+
+section {
+	width: 70%;
+	margin: auto;
+	-webkit-box-shadow: 0 0 5px rgb(0,0,0, .3);
+	box-shadow: 0 0 5px rgb(0,0,0, .3);
+	padding: 30px;
+}
+
+section img {
+	width: 100px;
+}
+
+@media screen and (max-width: 800px) {
+	p {
+		-webkit-columns:2;
+		-moz-columns:2;
+		columns:2;	
+	}
+}
+
+@media screen and (max-width: 500px) {
+	p {
+		-webkit-columns:1;
+		-moz-columns:1;
+		columns:1;
+	}
+}

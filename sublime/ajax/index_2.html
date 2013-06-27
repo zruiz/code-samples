@@ -1,0 +1,158 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+        <title>My Ajax Page</title>
+        <!-- <link rel="stylesheet" href="css/style.css"> -->
+        <link rel="author" href="humans.txt">
+        <style>
+        .container li {
+         	list-style: none;
+         }
+        .popup {
+         	margin: 50px auto;
+         	background: #e3e3e3;
+         	width: 350px;
+         	height: 350px;
+         	padding: 10px;
+         	/*opacity: 0; 
+         	filter: alpha(opacity=0);*/
+         	display: none;
+         	position: relative;
+         }
+
+         ul li {
+         	list-style: none;
+         	color: red;
+         }
+         span.close {
+                top:10px;
+                position: absolute;
+                right: 10px;
+                cursor: pointer;
+                margin: auto;
+            }
+        </style>
+    </head>
+    <body>
+    	<ul>
+    	<li><a href="about.html">About Me</a></li>
+        <li><a class="contact" href="contact.html">Contact Me</a></li>
+		</ul>
+
+		<div class="wrap"></div>
+
+		<div class="popup"></div>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+		
+        <script>
+        	// (function() {
+        	// 	var wrap= $('.wrap');
+        	// 	$('a').on('click', function (e) {
+        	// 		var href = $(this).attr('href');
+        	// 		wrap.load( href + ' .container');
+        	// 		e.preventDefault();
+        	// 		console.log(href);
+        	// 	});
+        	// })();
+
+        	// (function() {
+        	// 	var popup = $('div.popup');
+        	// 	$('a').on('click', function (e) {
+        	// 		var href = $(this).attr('href');
+        	// 		// popup.css({
+        	// 		// 	'top': 30,
+        	// 		// 	'display' : 'block',
+        	// 		// 	'position' : 'absolute'
+        	// 		//    });
+
+        	// 		popup.animate({
+        	// 			'opacity': 1,
+         //            }, 2000);
+                          
+        	// 		popup.load( href + ' .container');
+        	// 		e.preventDefault();
+        	// 		console.log(href);
+        	// 	});
+        	// })();
+
+        	(function() {
+        		var contactForm = {
+                    container: $('.popup'),  //contactForm.container = contactForm['container'] =  contactForm[variable]
+                    closing: $('span.close'),
+
+                    config: {
+                        effect: 'slideToggle',
+                        speed: 300
+                    },
+                    // constructor
+    				init: function (config) {
+                        $.extend(this.config, config);
+                        //console.log(this);
+                        var a =  $('a.contact');
+                            cf = this.container;
+                        a.on('click', function (e) {
+                        	//console.log(this);
+                        	contactForm.show.call(contactForm);
+                        	e.preventDefault();
+                        });
+                    },
+
+                    show: function () {
+                    	  //console.log(this);
+                          if (this.container.is(":hidden")) {
+                               
+                          	   this.container.load('contact.html .container');
+                          	   this.container.slideToggle("300");
+                               //this.close.call(this.container);
+                               
+                               $.get('contact.html', function ( results ) {
+                                 $(this).trigger('contact/results', results);
+                                 //console.log(this);
+                               });
+
+                               $(this).on('contact/results', function ( e, results ) {
+                                                 
+                                 var closing = $(results).find('span.close');
+                                 console.log(closing);
+                                 closing.on('click', this.close.call(this.container));
+
+                         });
+        			      }
+                      
+                    },
+
+                    close: function () {
+                    	//console.log(this);
+                    	var $this = $(this);
+                    	    
+                          $this.slideToggle("300");
+                    	        	
+                         
+
+                    		// closing
+	                    	//     .css('opacity', '1')
+	                    	//     .on('click', function () {
+	                    	//   	  $this.slideToggle("300");
+
+                    	    // });
+                    	                    	    
+                               	
+                    	
+                    }
+
+                };
+
+
+              	contactForm.init({
+              		effect: 'fadeToggle',
+              		speed: 5000
+              	});
+
+        	})();	
+        	
+        </script>
+    </body>
+</html>

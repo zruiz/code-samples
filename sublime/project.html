@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>History API</title>
+</head>
+<body>
+	<ul>
+		<li><a href="http://localhost/test-sublime/images/1.jpg" title="image 1" data-url="image1">Image 1</a></li>
+		<li><a href="http://localhost/test-sublime/images/2.jpg" title="image 2" data-url="image2">Image 2</a></li>
+		<li><a href="http://localhost/test-sublime/images/3.jpg" title="image 3" data-url="image3">Image 3</a></li>
+	</ul>
+
+<div class="result">
+	<script id="template" type="template">
+		<h2>{{title}}</h2>
+		<img src="{{imgSrc}}" alt="{{title}}">
+	</script>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+<script>
+	;(function(){
+		if (!!(window.history && history.pushState)) {
+		var Viewer = {
+			template: $('#template').html(),
+
+			init: function(){
+               //alert('hello');
+               $('ul').on('click', 'a', function(e){
+                  Viewer.applyTemplate(this)
+                        .updateHistory(this);
+                  e.preventDefault();
+               });
+
+               this.handleState();  //listen for back or foward buttons
+			},
+			applyTemplate: function(data) {
+				//console.log(this.template);
+				var template =
+				    this.template.replace(/{{title}}/g, data.title)
+				                 .replace(/{{imgSrc}}/, data.href);
+				    //console.log(template);
+				    $('.result')
+					    .children()
+					        .remove()
+					        .end()
+					    .append(template);
+					return this;
+			},
+			updateHistory: function(data) {
+				var datatoSave ={
+					title: data.title,
+					href: data.href,
+					url: data.dataset.url
+				};
+				history.pushState(
+				//data
+				//title
+				//url
+				datatoSave,
+				data.title,
+				data.dataset.url
+				);
+			},
+			handleState: function() {
+				$(window).on('popstate', function(e){
+					//console.log(e);
+					if (e.originalEvent.state) {
+						Viewer.applyTemplate(e.originalEvent.state);
+					}
+					
+				});
+			}
+		}
+        Viewer.init();
+       }
+	})();
+</script>
+<script>
+	// history.go();
+	// history.go(-1);
+	// history.go(2);
+	// history.go(0);
+	// history.forward();
+	// history.back();
+	// history.pushState(
+	// 	//data
+	// 	//title
+	// 	//url
+	// 	'data',
+	// 	'My Page Title',
+	// 	'page'
+	// 	);
+
+	// window.addEventListener('popstate', function(e){
+	// 	console.log(e);
+	// });
+</script>
+</body>
+</html>
